@@ -9,6 +9,7 @@ namespace GodsCarrom.CarromMan
         private PlayerNumber owner;
         //public Sprite sprite;
 
+        public CarromManView carromPrefab;
         public float minLaunchValue;
         public float maxLaunchValue;
 
@@ -22,6 +23,8 @@ namespace GodsCarrom.CarromMan
         public void CopyFrom(CarromManScriptableObject carromSO)
         {
             //this.sprite = carromSO.sprite;
+            this.owner = carromSO.owner;
+
             this.minLaunchValue = carromSO.minLaunchValue;
             this.maxLaunchValue = carromSO.maxLaunchValue;
             this.minRange = carromSO.minRange;

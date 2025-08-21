@@ -37,7 +37,7 @@ namespace GodsCarrom.Hole
 
         private void AddToPottedPieces(CarromManController piece) => pottedPieces.Add(piece);
 
-        internal bool HasPottedPiece(PlayerNumber opponent)
+        public bool HasPottedPiece(PlayerNumber opponent)
         {
             foreach(CarromManController carromMan in  pottedPieces)
             {

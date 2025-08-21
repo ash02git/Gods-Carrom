@@ -44,7 +44,7 @@ namespace GodsCarrom.Gameplay
         public void CreateGameplay()
         {
             GameService.Instance.BoardService.CreateBoard();
-            GameService.Instance.HoleService.CreateHoles();
+            //GameService.Instance.HoleService.CreateHoles();
             GameService.Instance.PlayerService.CreatePlayers(gameplaySO.p1FormationSO, gameplaySO.p2FormationSO, gameplaySO.carromSO);
             GameService.Instance.UIService.CreateGameplayUI(gameplaySO.p1GodSO, gameplaySO.p2GodSO);
         }
@@ -88,7 +88,7 @@ namespace GodsCarrom.Gameplay
         {
             await Task.Delay(4000);//change this hardCoded value later
 
-            if( !GameService.Instance.HoleService.HasPottedPiece(GetOpponent(previousTurn)))
+            if( !GameService.Instance.BoardService.HasPottedPiece(GetOpponent(previousTurn)) )
             {
                 if (previousTurn == PlayerNumber.Player1)
                     SetTurn(PlayerNumber.Player2);

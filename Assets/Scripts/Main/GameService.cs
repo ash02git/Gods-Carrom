@@ -15,6 +15,7 @@ namespace GodsCarrom.Main
         //prefabs
         [SerializeField] private GameObject board;
         [SerializeField] private CarromManView carromManPrefab;
+        [SerializeField] private HoleView holePrefab;
 
         //ScriptableObjects
         [SerializeField] private GameplayScriptableObject gameplayScriptableObject;
@@ -25,8 +26,8 @@ namespace GodsCarrom.Main
         public GameplayService GameplayService { get; private set; }
         public BoardService BoardService { get; private set; }
         public PlayerService PlayerService { get; private set; }
-        public CarromMenService CarromMenService { get; private set; }
-        public HoleService HoleService { get; private set; }
+        //public CarromMenService CarromMenService { get; private set; }
+        //public HoleService HoleService { get; private set; }
         public EventService EventService { get; private set; }
 
         [SerializeField] private UIService uiService;
@@ -38,10 +39,10 @@ namespace GodsCarrom.Main
 
             EventService = new EventService();
             GameplayService = new GameplayService(gameplayScriptableObject);
-            BoardService = new BoardService(board);
-            HoleService = new HoleService(gameplayScriptableObject.holeData);
-            CarromMenService = new CarromMenService(carromManPrefab, gameplayScriptableObject.carromSO);
-            PlayerService = new PlayerService(player1SO, player2SO);
+            BoardService = new BoardService(board, holePrefab, gameplayScriptableObject.holeData);
+            //HoleService = new HoleService(gameplayScriptableObject.holeData);
+            //CarromMenService = new CarromMenService(carromManPrefab, gameplayScriptableObject.carromSO);
+            PlayerService = new PlayerService(player1SO, player2SO, carromManPrefab);
         }
 
         private void Start()

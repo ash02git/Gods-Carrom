@@ -28,19 +28,19 @@ namespace GodsCarrom.CarromMan
                 CarromManScriptableObject newCarromSO = ScriptableObject.CreateInstance<CarromManScriptableObject>();
                 newCarromSO.CopyFrom(carromSO);
 
-                CarromManController newCarromMan = new CarromManController(Owner, newCarromSO, carromManPrefab);
+                //CarromManController newCarromMan = new CarromManController(Owner, newCarromSO);
 
                 if (Owner.GetPlayerNumber() == PlayerNumber.Player1)
                 {
-                    newCarromMan.SetPosition(position);
+                    //newCarromMan.SetPosition(position);
                 }
                 else
                 {
-                    newCarromMan.SetPosition(new Vector2(position.x, -position.y));
+                    //newCarromMan.SetPosition(new Vector2(position.x, -position.y));
                 }
 
-                carroms.Add(newCarromMan);
-                carromMenList.Add(newCarromMan);
+                //carroms.Add(newCarromMan);
+                //carromMenList.Add(newCarromMan);
             }
 
             return carromMenList;

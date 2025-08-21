@@ -9,13 +9,14 @@ namespace GodsCarrom.Abilites
 
         public ResurrectAbility(PlayerNumber playerNumber)
         {
-            abilityType = AbilityType.AffectingPieceCount;
             this.playerNumber = playerNumber;
+            abilityType = AbilityType.AffectingPieceCount;
+            castTime = AbilityCastTime.PreMove;
         }
 
         public override void OnAbilityCast()
         {
-            int currentPiecesCount = GameService.Instance.CarromMenService.GetPiecesCount(playerNumber);
+            int currentPiecesCount = 0;//change later
 
             int numOfPiecesToBeResurrected = 0;
 
@@ -24,7 +25,12 @@ namespace GodsCarrom.Abilites
             else
                 numOfPiecesToBeResurrected = maxResurrectCount;
 
-            GameService.Instance.CarromMenService.CreateCarromMen(playerNumber, numOfPiecesToBeResurrected);
+            GameService.Instance.PlayerService.SpawnCarromMen(playerNumber, numOfPiecesToBeResurrected);
+        }
+
+        public override void PostAbilityCast()
+        {
+            //nothing for resurrect ability
         }
     }
 }

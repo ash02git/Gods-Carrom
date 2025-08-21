@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b3cf7ad1808944d91e957e424622d5, type: 3}
   m_Name: CarromManSO
   m_EditorClassIdentifier: 
-  owner: 1
-  sprite: {fileID: 0}
+  carromPrefab: {fileID: 8360168072253778971, guid: c02cdd32b1f879e408b26b1721c7cb03, type: 3}
   minLaunchValue: 5
   maxLaunchValue: 15
   minRange: 1.15

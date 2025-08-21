@@ -1,4 +1,5 @@
 ﻿using GodsCarrom.Player;
+using System;
 using UnityEngine;
 
 namespace GodsCarrom.CarromMan
@@ -11,9 +12,9 @@ namespace GodsCarrom.CarromMan
 
         private PlayerController Owner;
 
-        public CarromManController( PlayerController Owner, CarromManScriptableObject carromManSO, CarromManView carromManPrefab)
+        public CarromManController( PlayerController Owner, CarromManScriptableObject carromManSO, CarromManView carromPrefab)
         {
-            carromManView = GameObject.Instantiate(carromManPrefab);
+            carromManView = GameObject.Instantiate(carromPrefab);
             this.carromManSO = carromManSO;
             this.Owner = Owner;
 
@@ -52,6 +53,16 @@ namespace GodsCarrom.CarromMan
         public float CalculateArrowAngle(Vector2 direction)
         {
             return Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f;
+        }
+
+        public void SetPosition()
+        {
+            
+        }
+
+        public void SetLayer(string v)
+        {
+            carromManView.gameObject.layer = LayerMask.NameToLayer(v);
         }
     }
 }

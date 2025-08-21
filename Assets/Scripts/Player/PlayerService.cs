@@ -1,6 +1,7 @@
 ﻿using GodsCarrom.CarromMan;
 using GodsCarrom.Formations;
 using GodsCarrom.Main;
+using System;
 using UnityEngine;
 
 namespace GodsCarrom.Player
@@ -10,9 +11,12 @@ namespace GodsCarrom.Player
         private PlayerController player1controller;
         private PlayerController player2controller;
 
-        public PlayerService(PlayerScriptableObject p1SO, PlayerScriptableObject p2SO)
+        private CarromManView carromPrefab;
+
+        public PlayerService(PlayerScriptableObject p1SO, PlayerScriptableObject p2SO, CarromManView carromPrefab)
         {
             SubscribeToEvents();
+            this.carromPrefab = carromPrefab;
         }
 
         private void SubscribeToEvents()
@@ -35,11 +39,16 @@ namespace GodsCarrom.Player
 
         public void CreatePlayers(FormationScriptableObject p1FormationSO, FormationScriptableObject p2FormationSO, CarromManScriptableObject carromSO)
         {
-            player1controller = new PlayerController(p1FormationSO, PlayerNumber.Player1, carromSO);
-            player2controller = new PlayerController(p2FormationSO, PlayerNumber.Player2, carromSO);
+            player1controller = new PlayerController(p1FormationSO, PlayerNumber.Player1, carromSO, carromPrefab);
+            player2controller = new PlayerController(p2FormationSO, PlayerNumber.Player2, carromSO, carromPrefab);
+        }
 
-            //player1controller.SetPlayerNumber(PlayerNumber.Player1);
-            //player2controller.SetPlayerNumber(PlayerNumber.Player2);
+        public void SpawnCarromMen(PlayerNumber playerNumber, int numOfPiecesToBeResurrected)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                player1controller.SpawnCarromMen(numOfPiecesToBeResurrected, carromPrefab);
+            else if (playerNumber == PlayerNumber.Player2)
+                player1controller.SpawnCarromMen(numOfPiecesToBeResurrected, carromPrefab);
         }
     }
 }
