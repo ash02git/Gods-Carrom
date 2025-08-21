@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400781d52bdc4b04db7156de4bf93995, type: 3}
+  m_Name: Player 2 SO
+  m_EditorClassIdentifier: 
+  playerNumber: 2
+  carromManSprite: {fileID: 0}
+  carromManDetails: {fileID: 11400000, guid: ab41f172f178b5d4c80e9573d70a15ea, type: 2}
+  carromManPositions:
+  - {x: 0, y: -3.5}
+  - {x: 2.5, y: -3.5}
+  - {x: -2.5, y: -3.5}
+  - {x: 5, y: -3.5}
+  - {x: -5, y: -3.5}
+  - {x: 1.25, y: -5}
+  - {x: -1.25, y: -5}
+  - {x: 3.75, y: -5}
+  - {x: -3.75, y: -5}
