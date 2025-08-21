@@ -24,3 +24,13 @@ namespace GodsCarrom.Abilites
         Invisibility//Hades - Your pieces become invisible, opponent has to guess his shot ( Post Move)
     }
 }
+
+/*
+ * Note for Mentor:- 
+ * Basically there are three types of abilities:- 
+ * 1. That affects the striking piece - Typically done InMove
+ * 2. Creating or destroying new pieces - Typically done PreMove
+ * 3. Denying vision of the board or distorting the board - Typically done PostMove (makes it harder for opponents)
+ * 
+ * I must find the flow of checks regarding turns, ability selected and ability cast.
+*/
