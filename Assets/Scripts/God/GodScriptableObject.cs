@@ -1,4 +1,6 @@
+using GodsCarrom.Abilites;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace GodsCarrom.Gods
 {
@@ -8,6 +10,8 @@ namespace GodsCarrom.Gods
         public GodName godName;
         public Sprite image;
         public Vector2 imageDimensions;
+
+        public List<AbilityDetails> abilities;
 
         //dimensions for width and height to display it
         //3 abilities

@@ -1,5 +1,7 @@
 using GodsCarrom.Gods;
+using GodsCarrom.Player;
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace GodsCarrom.UI
@@ -7,24 +9,27 @@ namespace GodsCarrom.UI
     public class UIService : MonoBehaviour
     {
         [Header("Formation Selection UI")]
-        private FormationSelectionUIController formationSelectionUIController;
         [SerializeField] private FormationSelectionUIView formationSelectionUIView;
         [SerializeField] private FormationButtonView formationButtonPrefab;
+        private FormationSelectionUIController formationSelectionUIController;
 
         [Header("God Selection UI")]
-        private GodSelectionUIController godSelectionUIController;
         [SerializeField] private GodSelectionUIView godSelectionUIView;
         [SerializeField] private GodButtonView godButtonPrefab;
+        [SerializeField] private TextMeshProUGUI abilityTextPrefab;
+        private GodSelectionUIController godSelectionUIController;
+        
 
         [Header("Gameplay UI")]
-        private GameplayUIController gameplayUIController;
         [SerializeField] private GameplayUIView gameplayUIView;
+        [SerializeField] private AbilityButtonView abilityButtonPrefab;
+        private GameplayUIController gameplayUIController;
 
         private void Start()
         {
             formationSelectionUIController = new FormationSelectionUIController(formationSelectionUIView, formationButtonPrefab);
-            godSelectionUIController = new GodSelectionUIController(godSelectionUIView, godButtonPrefab);
-            gameplayUIController = new GameplayUIController(gameplayUIView);
+            godSelectionUIController = new GodSelectionUIController(godSelectionUIView, godButtonPrefab, abilityTextPrefab);
+            gameplayUIController = new GameplayUIController(gameplayUIView, abilityButtonPrefab);
         }
 
         public void ShowFormationSelectionUI()
@@ -60,7 +65,18 @@ namespace GodsCarrom.UI
 
         public void CreateGameplayUI(GodScriptableObject p1GodSO, GodScriptableObject p2GodSO)
         {
-            gameplayUIController.InitializePlayersUI(p1GodSO, p2GodSO);
+            gameplayUIController.InitializePlayersUIView(p1GodSO, p2GodSO);
         }
+
+        public void TurnOnAbilityBlocker(PlayerNumber currentTurn)
+        {
+            gameplayUIController.TurnOnAbilityBlocker(currentTurn);
+        }
+
+        public void TurnOffAbilityBlocker(PlayerNumber currentTurn)
+        {
+            gameplayUIController.TurnOffAbilityBlocker(currentTurn);
+        }
+
     }
 }

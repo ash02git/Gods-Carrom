@@ -11,17 +11,17 @@ namespace GodsCarrom.Board
     public class BoardService
     {
         //preset data
-        private GameObject boardPrefab;
+        private BoardController boardPrefab;
         private HoleView holePrefab;
         private HoleData holeData;
 
         //service related data
-        private GameObject board;
+        private BoardController board;
         private PolygonCollider2D collider;
         private List<HoleView> holes;
         private List<CarromManController> pottedPieces;
 
-        public BoardService(GameObject boardPrefab,HoleView holePrefab, HoleData holeData)
+        public BoardService(BoardController boardPrefab,HoleView holePrefab, HoleData holeData)
         {
             this.boardPrefab = boardPrefab;
             this.holePrefab = holePrefab;
@@ -88,5 +88,8 @@ namespace GodsCarrom.Board
 
             return point;
         }
+
+        public void TurnOnBlocker() => board.TurnOnBlocker();
+        public void TurnOffBlocker() => board.TurnOffBlocker();
     }
 }

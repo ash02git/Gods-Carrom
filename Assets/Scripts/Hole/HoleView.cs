@@ -13,10 +13,8 @@ namespace GodsCarrom.Hole
             {
                 carromManController.DestoryCarromMan();
 
-                Debug.Log("Invoked OnCarromPotted");
-                GameService.Instance.EventService.OnCarromPotted.InvokEvent(carromManController);
+                GameService.Instance.EventService.OnCarromPotted.InvokeEvent(carromManController);
 
-                Debug.Log("Invoked OnPointScored");
                 GameService.Instance.EventService.OnPointScored.InvokeEvent();
             }
         }

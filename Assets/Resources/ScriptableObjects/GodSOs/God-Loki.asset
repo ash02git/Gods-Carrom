@@ -15,3 +15,10 @@ MonoBehaviour:
   godName: 2
   image: {fileID: 21300000, guid: bbe95a6599241854283ecef2570528e9, type: 3}
   imageDimensions: {x: 350, y: 350}
+  abilities:
+  - abilityName: 6
+    castTime: 0
+  - abilityName: 7
+    castTime: 0
+  - abilityName: 8
+    castTime: 0

@@ -1,5 +1,5 @@
 using GodsCarrom.Main;
-using GodsCarrom.Player;
+using GodsCarrom.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,15 +25,16 @@ namespace GodsCarrom.CarromMan
 
         private void OnMouseDown()
         {
-            if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
-                direction_arrow.SetActive(true);
+            //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
+            if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
+                    direction_arrow.SetActive(true);
         }
 
         private void OnMouseDrag()
         {
-            if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
+            //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
+            if(GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
             {
-                Debug.Log("Inside OnMouseDrag");
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 direction = mousePosition - transform.position;
 
@@ -55,14 +56,21 @@ namespace GodsCarrom.CarromMan
 
         private void OnMouseUp()
         {
-            if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
+            //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
+            if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
             {
                 direction_arrow.SetActive(false);
 
                 SetVelocity();
 
-                GameService.Instance.GameplayService.SetTurn(PlayerNumber.None);
-                GameService.Instance.GameplayService.StartTimer();
+                //GameService.Instance.GameplayService.SetTurn(PlayerNumber.None);
+                //GameService.Instance.GameplayService.ChangeTurn();
+                //GameService.Instance.GameplayService.StartTimer();
+
+                //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.InMovePhase);
+
+                GameService.Instance.gameManager.phaseOver = true;
+                //GameService.Instance.gameManager.StartMoveTimer();
             }
         }
 

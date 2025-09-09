@@ -1,3 +1,4 @@
+using GodsCarrom.Abilites;
 using GodsCarrom.Board;
 using GodsCarrom.CarromMan;
 using GodsCarrom.Events;
@@ -13,7 +14,7 @@ namespace GodsCarrom.Main
     public class GameService : GenericMonoSingleton<GameService>
     {
         //prefabs
-        [SerializeField] private GameObject board;
+        [SerializeField] private BoardController board;
         [SerializeField] private CarromManView carromManPrefab;
         [SerializeField] private HoleView holePrefab;
 
@@ -26,12 +27,13 @@ namespace GodsCarrom.Main
         public GameplayService GameplayService { get; private set; }
         public BoardService BoardService { get; private set; }
         public PlayerService PlayerService { get; private set; }
-        //public CarromMenService CarromMenService { get; private set; }
-        //public HoleService HoleService { get; private set; }
         public EventService EventService { get; private set; }
+        public AbilityService AbilityService { get; private set; }
 
         [SerializeField] private UIService uiService;
         public UIService UIService => uiService;
+
+        public Manager gameManager;
 
         protected override void Awake()
         {
@@ -40,14 +42,18 @@ namespace GodsCarrom.Main
             EventService = new EventService();
             GameplayService = new GameplayService(gameplayScriptableObject);
             BoardService = new BoardService(board, holePrefab, gameplayScriptableObject.holeData);
-            //HoleService = new HoleService(gameplayScriptableObject.holeData);
-            //CarromMenService = new CarromMenService(carromManPrefab, gameplayScriptableObject.carromSO);
             PlayerService = new PlayerService(player1SO, player2SO, carromManPrefab);
+            AbilityService = new AbilityService();
         }
 
         private void Start()
         {
             UIService.ShowGodSelectionUI();
+        }
+
+        public void TurnOnManager()
+        {
+            gameManager.gameObject.SetActive(true);
         }
     }
 }

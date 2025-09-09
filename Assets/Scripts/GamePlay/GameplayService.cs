@@ -1,23 +1,27 @@
+using GodsCarrom.Abilites;
 using GodsCarrom.Formations;
 using GodsCarrom.Gods;
 using GodsCarrom.Main;
 using GodsCarrom.Player;
 using GodsCarrom.Utilities;
 using System.Threading.Tasks;
-using UnityEditor.Playables;
 
 namespace GodsCarrom.Gameplay
 {
     public class GameplayService
     {
-        private PlayerNumber currentTurn;
-        private PlayerNumber previousTurn;
+        private PlayerNumber currentTurn; //to indicate which player is currently playing
+        private PlayerNumber previousTurn; // to indicate which player was previously playing
+
+        private AbilityCastTime currentPhase; //change this to PhaseEnum later, used to store current phase of the Move/Turn.
 
         private GameplayScriptableObject gameplaySO;
 
         public GameplayService(GameplayScriptableObject gameplaySO)
         {
-            SetTurn(PlayerNumber.Player1);
+            //SetTurn(PlayerNumber.Player1);
+            currentTurn = PlayerNumber.Player1;
+            previousTurn = PlayerNumber.Player2;
 
             SubscribeToEvents();
             this.gameplaySO = gameplaySO;
@@ -44,14 +48,34 @@ namespace GodsCarrom.Gameplay
         public void CreateGameplay()
         {
             GameService.Instance.BoardService.CreateBoard();
-            //GameService.Instance.HoleService.CreateHoles();
             GameService.Instance.PlayerService.CreatePlayers(gameplaySO.p1FormationSO, gameplaySO.p2FormationSO, gameplaySO.carromSO);
             GameService.Instance.UIService.CreateGameplayUI(gameplaySO.p1GodSO, gameplaySO.p2GodSO);
+            GameService.Instance.TurnOnManager();
+        }
+
+        public void GameLoop()
+        {
+            //SetTurn(PlayerNumber.Player1);
+            //do
+            //{
+
+            //} while (true);
+            while(true)
+            {
+                Task a = PhaseTimer();
+            }
+        }
+
+        private async Task PhaseTimer()
+        {
+            await Task.Delay(4000); 
         }
 
         private void SubscribeToEvents()
         {
             //GameService.Instance.EventService.OnPointScored.AddListener(CheckGameOver);
+            //GameService.Instance.EventService.OnPhaseCompleted.AddListener(ChangePhase);
+            GameService.Instance.EventService.OnMoveCompleted.AddListener(ChangeTurn);
         }
 
         private void CheckGameOver()
@@ -61,13 +85,8 @@ namespace GodsCarrom.Gameplay
 
         private void UnsubscribeToEvents()
         {
-
-        }
-
-        public void SetTurn(PlayerNumber turn)
-        {
-            previousTurn = currentTurn;
-            currentTurn = turn;
+            //GameService.Instance.EventService.OnPhaseCompleted.RemoveListener(ChangePhase);
+            GameService.Instance.EventService.OnMoveCompleted.RemoveListener(ChangeTurn);
         }
 
         public PlayerNumber GetTurn() => currentTurn;
@@ -90,15 +109,60 @@ namespace GodsCarrom.Gameplay
 
             if( !GameService.Instance.BoardService.HasPottedPiece(GetOpponent(previousTurn)) )
             {
-                if (previousTurn == PlayerNumber.Player1)
-                    SetTurn(PlayerNumber.Player2);
-                else
-                    SetTurn(PlayerNumber.Player1);
+                //if (previousTurn == PlayerNumber.Player1)
+                //    SetTurn(PlayerNumber.Player2);
+                //else
+                //    SetTurn(PlayerNumber.Player1);
+                ChangeTurn();
             }
-            else
+            //else
+            //{
+            //    SetTurn(previousTurn);
+            //}
+        }
+
+        private void ChangePhase()
+        {
+            switch(currentPhase)
             {
-                SetTurn(previousTurn);
+                case AbilityCastTime.PreMove:
+                    currentPhase = AbilityCastTime.InMove;
+                    break;
+                case AbilityCastTime.InMove:
+                    currentPhase = AbilityCastTime.PostMove;
+                    break;
+                case AbilityCastTime.PostMove:
+                    
+                    currentPhase = AbilityCastTime.PreMove;
+                    break;
             }
+        }
+
+        //Maybe you think again you dumb fool
+        //You can have both SetTurn and ChangeTurn
+        //SetTurn:- for cases the player pots, ChangeTurn:- for normal flow of play
+        private void ChangeTurnNew()
+        {
+            switch(currentTurn)
+            {
+                case PlayerNumber.Player1:
+                    currentTurn = PlayerNumber.None;
+                    break;
+                case PlayerNumber.Player2:
+                    currentTurn = PlayerNumber.None;
+                    break;
+                case PlayerNumber.None:
+                    currentTurn = PlayerNumber.None;
+                    break;
+            }
+        }
+
+        public void ChangeTurn()
+        {
+            currentTurn = GetOpponent(currentTurn);
+            previousTurn = GetOpponent(currentTurn);
         }
     }
 }
+
+//Currently there is a problem 

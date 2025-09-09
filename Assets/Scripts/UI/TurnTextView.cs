@@ -7,6 +7,6 @@ public class TurnTextView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI turnText;
     private void FixedUpdate()
     {
-       turnText.text = "TURN : " + GameService.Instance.GameplayService.GetTurn().ToString();
+        turnText.text = "TURN : " + GameService.Instance.gameManager.GetCurrentTurn();
     }
 }
