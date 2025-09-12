@@ -15,10 +15,14 @@ MonoBehaviour:
   godName: 4
   image: {fileID: 21300000, guid: e3f4c31caf106224a9189d37c05b499a, type: 3}
   imageDimensions: {x: 250, y: 250}
+  godSymbol: {fileID: 21300000, guid: cf2293c277cf0e244a4709b10e9e6055, type: 3}
   abilities:
   - abilityName: 12
     castTime: 0
+    revertTime: 0
   - abilityName: 13
     castTime: 0
+    revertTime: 0
   - abilityName: 14
     castTime: 0
+    revertTime: 0

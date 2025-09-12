@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 392932570006998446}
   - component: {fileID: 9221895272883423678}
   - component: {fileID: -1870782419999589727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hole Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

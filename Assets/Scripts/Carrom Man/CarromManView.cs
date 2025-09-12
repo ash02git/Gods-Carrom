@@ -2,6 +2,7 @@ using GodsCarrom.Main;
 using GodsCarrom.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace GodsCarrom.CarromMan
 {
@@ -43,6 +44,12 @@ namespace GodsCarrom.CarromMan
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            //only for certain abilities this needs to be applicable
+            controller.ProcessCollission(collision.gameObject);
+        }
+
         private void UpdateAimSliderValue(Vector3 mousePosition, Vector3 position)
         {
             aimSlider.value =  controller.CalculateLaunchValue(mousePosition, position);
@@ -56,6 +63,8 @@ namespace GodsCarrom.CarromMan
 
         private void OnMouseUp()
         {
+
+            controller.GetOwnerController().SetStrikingPiece(controller);
             //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
             if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
             {
@@ -70,6 +79,8 @@ namespace GodsCarrom.CarromMan
                 //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.InMovePhase);
 
                 GameService.Instance.gameManager.phaseOver = true;
+
+                
                 //GameService.Instance.gameManager.StartMoveTimer();
             }
         }
@@ -83,5 +94,7 @@ namespace GodsCarrom.CarromMan
         }
 
         public CarromManController GetController() => controller;
+
+        public void SetSprite(Sprite godSymbol) => GetComponent<SpriteRenderer>().sprite = godSymbol;
     }
 }

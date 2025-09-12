@@ -1,6 +1,6 @@
-using GodsCarrom.Main;
 using GodsCarrom.Player;
 using UnityEngine;
+using GodsCarrom.Main;
 
 namespace GodsCarrom.Abilites
 {
@@ -22,21 +22,21 @@ namespace GodsCarrom.Abilites
         {
             Debug.Log(abilityName.ToString() + " is cast");
 
-            int currentPiecesCount = 0;//change later
+            int currentPiecesCount = GameService.Instance.PlayerService.GetPlayerPieceCount(playerNumber);
 
-            int numOfPiecesToBeResurrected = 0;
+            int numOfPiecesToBeResurrected;
 
             if (currentPiecesCount + maxResurrectCount > 9)
                 numOfPiecesToBeResurrected = 9 - currentPiecesCount;
             else
                 numOfPiecesToBeResurrected = maxResurrectCount;
 
-            //GameService.Instance.PlayerService.SpawnCarromMen(playerNumber, numOfPiecesToBeResurrected);
+            GameService.Instance.PlayerService.SpawnCarromMen(playerNumber, numOfPiecesToBeResurrected);
         }
 
         public override void OnAbilityReverted()// nothing to revert for a premove ability
         {
-            //Debug.Log(abilityName.ToString() + " is reverted");
+            Debug.Log(abilityName.ToString() + " is reverted");
         }
     }
 }

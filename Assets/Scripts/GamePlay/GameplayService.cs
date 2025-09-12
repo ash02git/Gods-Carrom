@@ -48,7 +48,7 @@ namespace GodsCarrom.Gameplay
         public void CreateGameplay()
         {
             GameService.Instance.BoardService.CreateBoard();
-            GameService.Instance.PlayerService.CreatePlayers(gameplaySO.p1FormationSO, gameplaySO.p2FormationSO, gameplaySO.carromSO);
+            GameService.Instance.PlayerService.CreatePlayers(gameplaySO);
             GameService.Instance.UIService.CreateGameplayUI(gameplaySO.p1GodSO, gameplaySO.p2GodSO);
             GameService.Instance.TurnOnManager();
         }

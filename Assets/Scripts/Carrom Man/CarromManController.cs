@@ -1,4 +1,5 @@
-﻿using GodsCarrom.Player;
+﻿using GodsCarrom.Abilites;
+using GodsCarrom.Player;
 using System;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace GodsCarrom.CarromMan
 {
     public class CarromManController
     {
-        //MVC references
+        //MVC reference
         private CarromManView carromManView;
         private CarromManScriptableObject carromManSO;
 
@@ -19,10 +20,14 @@ namespace GodsCarrom.CarromMan
             this.Owner = Owner;
 
             carromManView.SetController(this);
-            SetColor();
+            //SetColor();
         }
 
         public PlayerNumber GetOwner() => Owner.GetPlayerNumber();
+
+        public void SetOwner(PlayerController Owner) => this.Owner = Owner;
+
+        public PlayerController GetOwnerController() => Owner;
         
         public void SetPosition(Vector2 position) => carromManView.transform.position = position;
 
@@ -63,6 +68,26 @@ namespace GodsCarrom.CarromMan
         public void SetLayer(string v)
         {
             carromManView.gameObject.layer = LayerMask.NameToLayer(v);
+        }
+
+        public void SetSprite(Sprite godSymbol)
+        {
+            carromManView.SetSprite(godSymbol);
+        }
+
+        public virtual void ProcessCollission(GameObject collidedObject)
+        {
+            //Debug.Log("Collided");
+        }
+
+        public virtual void ActivateAbility(AbilitiesEnum abilityName)
+        {
+            Debug.Log("Ability is activated for striking controller");
+        }
+
+        public virtual void DeactivateAbility(AbilitiesEnum abilityName)
+        {
+            Debug.Log("Ability is deactivate for striking controller");
         }
     }
 }

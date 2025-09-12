@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9085569612118820108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1117504164959245694}
   - component: {fileID: 2842354898380209292}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: outerLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1253721856193934369}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Direction UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 894381919636299119}
   - component: {fileID: 3635701881490600170}
   - component: {fileID: 8360168072253778971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: carrom man prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,8 +230,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: bac19c2744eca8747a8c426c71ca00f4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -317,12 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimSlider: {fileID: 6734900789234479760}
   rigidbody_2d: {fileID: 0}
-  collider_2d: {fileID: 0}
   direction_arrow: {fileID: 5152502763321132492}
-  minLanchValue: 5
-  maxLanchValue: 15
-  range_min: 1.15
-  range_max: 4.5
 --- !u!1 &6353664644198987055
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9159473097150394824}
   - component: {fileID: 285178476192136204}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: innerLimit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +414,7 @@ GameObject:
   - component: {fileID: 8951338495423249687}
   - component: {fileID: 5386524379010054533}
   - component: {fileID: 594090889224480081}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2914074442660616438}
   - component: {fileID: 6734900789234479760}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +603,7 @@ GameObject:
   - component: {fileID: 3110879649035527555}
   - component: {fileID: 8773627257252661632}
   - component: {fileID: 3988226507339120821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4061557083281406402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RangeUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

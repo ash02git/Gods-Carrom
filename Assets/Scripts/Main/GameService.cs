@@ -20,6 +20,7 @@ namespace GodsCarrom.Main
 
         //ScriptableObjects
         [SerializeField] private GameplayScriptableObject gameplayScriptableObject;
+        [SerializeField] private BoardScriptableObject boardSO;
         [SerializeField] private PlayerScriptableObject player1SO;
         [SerializeField] private PlayerScriptableObject player2SO;
 

@@ -27,7 +27,7 @@ namespace GodsCarrom.UI
 
         private void OnCancelClicked()
         {
-            Debug.Log("Ability was not selected");
+            //Debug.Log("Ability was not selected");
             StopCoroutine(coroutine);
             gameObject.SetActive(false);
 
@@ -39,7 +39,7 @@ namespace GodsCarrom.UI
 
         public void OnAbilitySelected()
         {
-            Debug.Log("Ability was selected");
+            //Debug.Log("Ability was selected");
             StopCoroutine(coroutine);
             gameObject.SetActive(false);
 
@@ -60,7 +60,7 @@ namespace GodsCarrom.UI
 
         private IEnumerator UseAbilityTimer()
         {
-            Debug.Log("Ability Selection Started");
+            //Debug.Log("Ability Selection Started");
             yield return new WaitForSeconds(time);
 
             OnCancelClicked();

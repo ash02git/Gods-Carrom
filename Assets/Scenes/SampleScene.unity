@@ -4469,6 +4469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTime: 4
+  phaseOver: 0
 --- !u!1 &642267250
 GameObject:
   m_ObjectHideFlags: 0
@@ -7930,6 +7931,7 @@ MonoBehaviour:
   carromManPrefab: {fileID: 8360168072253778971, guid: c02cdd32b1f879e408b26b1721c7cb03, type: 3}
   holePrefab: {fileID: -1870782419999589727, guid: 0c6d9703740a70d4db2ac04229cf3a7a, type: 3}
   gameplayScriptableObject: {fileID: 11400000, guid: 8a145f6486f776f418ea020f3fe5bb88, type: 2}
+  boardSO: {fileID: 11400000, guid: 5c184b52dc7ece846a97de3bd3757285, type: 2}
   player1SO: {fileID: 11400000, guid: 5bc38b510128b144d9e1f7070389f44c, type: 2}
   player2SO: {fileID: 11400000, guid: e3ccd935d99ff3246a0ce159da5e9717, type: 2}
   uiService: {fileID: 1251986918}

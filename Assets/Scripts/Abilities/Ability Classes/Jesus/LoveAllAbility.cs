@@ -1,9 +1,13 @@
 ﻿using GodsCarrom.CarromMan;
+using GodsCarrom.Main;
 using GodsCarrom.Player;
+using GodsCarrom.Utilities;
+using System;
 using UnityEngine;
 
 namespace GodsCarrom.Abilites
 {
+    [Serializable]
     public class LoveAllAbility : Ability
     {
         private CarromManView carromMan;
@@ -18,24 +22,16 @@ namespace GodsCarrom.Abilites
             this.abilityName = abilityName;
         }
 
-        public void SetLayer(CarromManController carrom)
-        {
-            carrom.SetLayer("OnlyBoard");
-        }
-
-        public void RevertLayer(CarromManController carrom)
-        {
-            carrom.SetLayer("Default");
-        }
-
         public override void OnAbilityCast()
         {
             Debug.Log(abilityName.ToString() + " is cast");
+            GameService.Instance.PlayerService.ChangeLayerOfPieces(UtilityClass.GetOpponent(playerNumber), "OnlyBoard");
         }
 
         public override void OnAbilityReverted()
         {
             Debug.Log(abilityName.ToString() + " is reverted");
+            GameService.Instance.PlayerService.ChangeLayerOfPieces(UtilityClass.GetOpponent(playerNumber), "Pieces");
         }
     }
 }

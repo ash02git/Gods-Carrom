@@ -98,14 +98,14 @@ namespace GodsCarrom.Gameplay
 
         private IEnumerator AbilitySelectionPhase()
         {
-            Debug.Log("Ability Selection Phase started");
+            //Debug.Log("Ability Selection Phase started");
 
             GameService.Instance.UIService.TurnOffAbilityBlocker(currentTurn);
 
             yield return new WaitUntil(() => phaseOver == true);
 
             GameService.Instance.UIService.TurnOnAbilityBlocker(currentTurn);
-            Debug.Log("Ability Selection Phase ended");
+            //Debug.Log("Ability Selection Phase ended");
 
             phaseOver = false;//resetting phaseOver to false
         }
@@ -121,7 +121,7 @@ namespace GodsCarrom.Gameplay
 
         private IEnumerator PreMovePhase()
         {
-            Debug.Log("PreMove Phase started");
+            //Debug.Log("PreMove Phase started");
 
             //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
             //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
@@ -129,14 +129,14 @@ namespace GodsCarrom.Gameplay
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            Debug.Log("PreMove Phase ended");
+            //Debug.Log("PreMove Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator PlayerPhase()
         {
-            Debug.Log("Player Phase started");
+            //Debug.Log("Player Phase started");
 
             GameService.Instance.BoardService.TurnOffBlocker();
 
@@ -144,14 +144,14 @@ namespace GodsCarrom.Gameplay
 
             GameService.Instance.BoardService.TurnOnBlocker();
 
-            Debug.Log("Player Phase ended");
+            //Debug.Log("Player Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator InMovePhase()
         {
-            Debug.Log("InMove Phase started");
+            //Debug.Log("InMove Phase started");
 
             //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
             //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
@@ -159,14 +159,14 @@ namespace GodsCarrom.Gameplay
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            Debug.Log("InMove Phase ended");
+            //Debug.Log("InMove Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator PhysicsPhase()
         {
-            Debug.Log("Physics Move Phase started");
+            //Debug.Log("Physics Move Phase started");
 
             //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
             //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
@@ -175,14 +175,14 @@ namespace GodsCarrom.Gameplay
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            Debug.Log("Physics Phase ended");
+            //Debug.Log("Physics Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator PostMovePhase()
         {
-            Debug.Log("PostMove Phase started");
+            //Debug.Log("PostMove Phase started");
 
             //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
             //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
@@ -190,7 +190,7 @@ namespace GodsCarrom.Gameplay
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            Debug.Log("PostMove Phase ended");
+            //Debug.Log("PostMove Phase ended");
 
             phaseOver = false;
         }
@@ -211,7 +211,7 @@ namespace GodsCarrom.Gameplay
         private IEnumerator MoveTimer()
         {
             yield return new WaitForSeconds(moveTime);
-            Debug.Log("Move time is over");
+            //Debug.Log("Move time is over");
             phaseOver = true;
         }
 

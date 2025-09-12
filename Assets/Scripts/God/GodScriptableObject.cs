@@ -10,6 +10,7 @@ namespace GodsCarrom.Gods
         public GodName godName;
         public Sprite image;
         public Vector2 imageDimensions;
+        public Sprite godSymbol;
 
         public List<AbilityDetails> abilities;
 

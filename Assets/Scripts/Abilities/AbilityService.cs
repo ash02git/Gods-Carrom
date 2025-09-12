@@ -16,8 +16,6 @@ namespace GodsCarrom.Abilites
         private AbilityDetails selectedAbility;
         private Ability abilityClass;
 
-        //private List<AbilityPackage> toBeCasted;
-        //private List<AbilityPackage> toBeReverted;
         private List<AbilityPackage> toBeCasted;
         private List<AbilityPackage> toBeReverted;
 
@@ -33,16 +31,10 @@ namespace GodsCarrom.Abilites
 
         public void SetAbility(AbilityDetails selectedAbility)
         {
-            //this.selectedAbility = selectedAbility;
-            //abilityClass = UtilityClass.GetAbilityClass(selectedAbility);
-
-            //CheckAndCastAbility();
-
             AbilityPackage package = new AbilityPackage();
             package.selectedAbility = selectedAbility;
             package.abilityClass = UtilityClass.GetAbilityClass(selectedAbility);
 
-            //abilities.Add(package);
             toBeCasted.Add(package);
 
             GameService.Instance.gameManager.phaseOver = true;//ability is processed and stored in to be casted
