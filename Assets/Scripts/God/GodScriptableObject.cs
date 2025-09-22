@@ -18,5 +18,12 @@ namespace GodsCarrom.Gods
         //3 abilities
         //maybe shot power/speed
         //maybe piece weight 
-    }
+    } 
 }
+
+/*
+ * PlayerService Has:- 1. Player1Controller, 2. Player2Controller
+ * 
+ * PlayerController Has:- 1. Reference to all CarromMenControllers, 2. A God Object to store the abilities, 3. Reference to strikingCarrom
+ * 
+ */

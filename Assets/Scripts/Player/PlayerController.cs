@@ -4,7 +4,6 @@ using GodsCarrom.Formations;
 using GodsCarrom.Gods;
 using GodsCarrom.Main;
 using GodsCarrom.Utilities;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +34,11 @@ namespace GodsCarrom.Player
             CreateCarromMen(formationSO, this.carromSO, carromPrefab);
         }
 
-        public void SetStrikingPiece(CarromManController controller) => strikingController = controller;
+        public void SetStrikingPiece(CarromManController controller)// => strikingController = controller;
+        {
+            Debug.Log("Striking piece is set");
+            strikingController = controller;
+        }
 
         public void SetPlayerNumber(PlayerNumber playerNumber) => this.playerNumber = playerNumber;
 

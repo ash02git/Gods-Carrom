@@ -144,14 +144,14 @@ namespace GodsCarrom.Gameplay
 
             GameService.Instance.BoardService.TurnOnBlocker();
 
-            //Debug.Log("Player Phase ended");
+            Debug.Log("Player Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator InMovePhase()
         {
-            //Debug.Log("InMove Phase started");
+            Debug.Log("InMove Phase started");
 
             //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
             //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
@@ -159,7 +159,7 @@ namespace GodsCarrom.Gameplay
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            //Debug.Log("InMove Phase ended");
+            Debug.Log("InMove Phase ended");
 
             phaseOver = false;
         }

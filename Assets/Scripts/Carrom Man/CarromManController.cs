@@ -1,6 +1,5 @@
 ﻿using GodsCarrom.Abilites;
 using GodsCarrom.Player;
-using System;
 using UnityEngine;
 
 namespace GodsCarrom.CarromMan
@@ -88,6 +87,13 @@ namespace GodsCarrom.CarromMan
         public virtual void DeactivateAbility(AbilitiesEnum abilityName)
         {
             Debug.Log("Ability is deactivate for striking controller");
+        }
+
+        public virtual void SetVelocity(Vector3 mousePos, Vector3 position, float aimValue)
+        {
+            Debug.Log("Aim value is " + aimValue);
+            Vector2 forceDirection = position - mousePos;
+            carromManView.SetVelocity(forceDirection.normalized * aimValue);
         }
     }
 }

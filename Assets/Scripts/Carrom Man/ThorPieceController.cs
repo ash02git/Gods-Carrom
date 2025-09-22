@@ -12,6 +12,7 @@ namespace GodsCarrom.CarromMan
         public ThorPieceController(PlayerController owner, CarromManScriptableObject carromSO, CarromManView view) : base(owner, carromSO, view)
         {
             abilityStatus.Add(AbilitiesEnum.ThunderSmash, false);
+            abilityStatus.Add(AbilitiesEnum.PowerShot, false);
         }
 
         public override void ActivateAbility(AbilitiesEnum ability)
@@ -22,6 +23,22 @@ namespace GodsCarrom.CarromMan
         public override void DeactivateAbility(AbilitiesEnum ability)
         {
             abilityStatus[ability] = false;
+        }
+
+        public override void SetVelocity(Vector3 vector3, Vector3 position, float aimValue)
+        {
+            Debug.Log("Inside thor piece controller");
+            if (abilityStatus[AbilitiesEnum.PowerShot] == true)
+            {
+                Debug.Log("Power shot is done");
+                base.SetVelocity(vector3, position, aimValue * 2.0f);
+            }
+            else
+            {
+                Debug.Log("Normal shot is done");
+                base.SetVelocity(vector3, position, aimValue);
+            }
+                
         }
 
         public override void ProcessCollission(GameObject collidedObject)

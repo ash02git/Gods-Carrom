@@ -37,6 +37,8 @@ namespace GodsCarrom.CarromMan
             if(GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //Vector3 mousePosition = Input.mousePosition;
+                mousePosition.z = 0; //can be removed maybe
                 Vector2 direction = mousePosition - transform.position;
 
                 UpdateDirectionArrowRotation(direction);
@@ -63,14 +65,19 @@ namespace GodsCarrom.CarromMan
 
         private void OnMouseUp()
         {
-
+            GameService.Instance.gameManager.phaseOver = true;//phaseOver is done first so that InMove can happen
+            Debug.Log("Set Player Phase as over");
             controller.GetOwnerController().SetStrikingPiece(controller);
+            
             //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
             if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
             {
                 direction_arrow.SetActive(false);
 
-                SetVelocity();
+                
+
+                controller.SetVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);
+                //SetVelocity();
 
                 //GameService.Instance.GameplayService.SetTurn(PlayerNumber.None);
                 //GameService.Instance.GameplayService.ChangeTurn();
@@ -78,19 +85,21 @@ namespace GodsCarrom.CarromMan
 
                 //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.InMovePhase);
 
-                GameService.Instance.gameManager.phaseOver = true;
+                //GameService.Instance.gameManager.phaseOver = true;
 
                 
                 //GameService.Instance.gameManager.StartMoveTimer();
             }
         }
 
-        private void SetVelocity()
+        public void SetVelocity(Vector2 velocity)
         {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 forceDirection = transform.position - mousePosition;
+            //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //Vector2 forceDirection = transform.position - mousePosition;
 
-            rigidbody_2d.velocity = forceDirection.normalized * aimSlider.value;
+            //rigidbody_2d.velocity = forceDirection.normalized * aimSlider.value;
+
+            rigidbody_2d.velocity = velocity;
         }
 
         public CarromManController GetController() => controller;
