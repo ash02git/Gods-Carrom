@@ -21,8 +21,6 @@ namespace GodsCarrom.Main
         //ScriptableObjects
         [SerializeField] private GameplayScriptableObject gameplayScriptableObject;
         [SerializeField] private BoardScriptableObject boardSO;
-        [SerializeField] private PlayerScriptableObject player1SO;
-        [SerializeField] private PlayerScriptableObject player2SO;
 
         //Services
         public GameplayService GameplayService { get; private set; }
@@ -34,7 +32,7 @@ namespace GodsCarrom.Main
         [SerializeField] private UIService uiService;
         public UIService UIService => uiService;
 
-        public Manager gameManager;
+        public Manager gameManager;//gameplayManager actually - later change name to GameplayService( implementation like UIService).
 
         protected override void Awake()
         {
@@ -43,7 +41,7 @@ namespace GodsCarrom.Main
             EventService = new EventService();
             GameplayService = new GameplayService(gameplayScriptableObject);
             BoardService = new BoardService(board, holePrefab, gameplayScriptableObject.holeData);
-            PlayerService = new PlayerService(player1SO, player2SO, carromManPrefab);
+            PlayerService = new PlayerService(carromManPrefab);
             AbilityService = new AbilityService();
         }
 

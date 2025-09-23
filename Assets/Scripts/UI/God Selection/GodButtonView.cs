@@ -27,6 +27,7 @@ namespace GodsCarrom.UI
             GetComponent<Button>().onClick.AddListener(OnGodButtonClicked);
         }
 
+        //SetOwner and SetNameText could be fused into one function
         public void SetOwner(GodSelectionUIController Owner) => this.Owner = Owner;
 
         public void SetNameText(GodName godName)
@@ -43,10 +44,10 @@ namespace GodsCarrom.UI
 
         public void SetPlayerNumber(PlayerNumber playerNumber) => this.playerNumber = playerNumber;
 
-        public void SetAbilityTexts(List<AbilityDetails> abilities)
-        {
+        //public void SetAbilityTexts(List<AbilityDetails> abilities)
+        //{
 
-        }
+        //}
 
         public void CreateAbilityTexts(List<AbilityDetails> abilities, TextMeshProUGUI abilityTextPrefab)
         {

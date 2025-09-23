@@ -11,6 +11,17 @@ namespace GodsCarrom.Abilites
         public Ability abilityClass;
     }
 
+    public struct AbilityNameAndClass
+    {
+        public AbilitiesEnum abilityName;
+        public Ability abilityClass;
+
+        public AbilityNameAndClass(AbilitiesEnum name, Ability aClass)
+        {
+            abilityName = name; abilityClass = aClass;
+        }
+    }
+
     public class AbilityService
     {
         private AbilityDetails selectedAbility;
@@ -19,14 +30,14 @@ namespace GodsCarrom.Abilites
         private List<AbilityPackage> toBeCasted;
         private List<AbilityPackage> toBeReverted;
 
-        private List<int> randoms;
+        //private List<int> randoms;
 
         public AbilityService()
         {
             toBeCasted = new List<AbilityPackage>();
             toBeReverted = new List<AbilityPackage>();
 
-            randoms = new List<int>();
+            //randoms = new List<int>();
         }
 
         public void SetAbility(AbilityDetails selectedAbility)

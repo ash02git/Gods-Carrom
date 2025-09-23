@@ -1,6 +1,5 @@
 ﻿using GodsCarrom.Abilites;
 using GodsCarrom.CarromMan;
-using GodsCarrom.Formations;
 using GodsCarrom.Gameplay;
 using GodsCarrom.Main;
 using System;
@@ -10,15 +9,23 @@ namespace GodsCarrom.Player
 {
     public class PlayerService
     {
+        //references of PlayerControllers
         private PlayerController player1controller;
         private PlayerController player2controller;
 
+        //reference to Carrom Man Prefab
         private CarromManView carromPrefab;
 
-        public PlayerService(PlayerScriptableObject p1SO, PlayerScriptableObject p2SO, CarromManView carromPrefab)
+        public PlayerService(CarromManView carromPrefab)
         {
             SubscribeToEvents();
             this.carromPrefab = carromPrefab;
+        }
+
+        ~PlayerService()
+        {
+            player1controller = null;
+            player2controller = null;
         }
 
         private void SubscribeToEvents()
@@ -41,14 +48,11 @@ namespace GodsCarrom.Player
 
         public void CreatePlayers(GameplayScriptableObject gameplaySO)
         {
-            //player1controller = new PlayerController(p1FormationSO, PlayerNumber.Player1, carromSO, carromPrefab);
-            //player2controller = new PlayerController(p2FormationSO, PlayerNumber.Player2, carromSO, carromPrefab);
-
-            //player1controller = new PlayerController(gameplaySO.p1FormationSO, PlayerNumber.Player1, gameplaySO.carromSO, carromPrefab);
-            //player2controller = new PlayerController(gameplaySO.p2FormationSO, PlayerNumber.Player2, gameplaySO.carromSO, carromPrefab);
-
             player1controller = new PlayerController(gameplaySO.p1GodSO.godName, gameplaySO.p1GodSO.godSymbol, gameplaySO.p1FormationSO, PlayerNumber.Player1, gameplaySO.carromSO, carromPrefab);
             player2controller = new PlayerController(gameplaySO.p2GodSO.godName, gameplaySO.p2GodSO.godSymbol, gameplaySO.p2FormationSO, PlayerNumber.Player2, gameplaySO.carromSO, carromPrefab);
+
+            player1controller = new PlayerController(PlayerNumber.Player1 ,gameplaySO.p1GodSO, gameplaySO.p1FormationSO, gameplaySO.carromSO, carromPrefab);
+            player2controller = new PlayerController(PlayerNumber.Player2, gameplaySO.p2GodSO, gameplaySO.p2FormationSO, gameplaySO.carromSO, carromPrefab);
         }
 
         public void SpawnCarromMen(PlayerNumber playerNumber, int numOfPiecesToBeResurrected)
@@ -92,5 +96,13 @@ namespace GodsCarrom.Player
             else if (playerNumber == PlayerNumber.Player2)
                 player2controller.ChangeLayerOfPieces(v);
         }
+
+        //public AbilityNameAndClass GetAbilityClassAndName(PlayerNumber playerNumber, AbilitiesEnum abilityName)
+        //{
+        //    if (playerNumber == PlayerNumber.Player1)
+        //        player1controller.GetAbilityClassAndName(abilityName);
+        //    else if (playerNumber == PlayerNumber.Player2)
+        //        player2controller.GetAbilityClassAndName(abilityName);
+        //}
     }
 }

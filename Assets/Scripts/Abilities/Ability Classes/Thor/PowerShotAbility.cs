@@ -11,7 +11,7 @@ namespace GodsCarrom.Abilites
         public PowerShotAbility(PlayerNumber playerNumber, AbilitiesEnum abilityName)
         {
             this.playerNumber = playerNumber;
-            castTime = AbilityCastTime.InMove;
+            castTime = AbilityCastTime.PlayerMove;//new ability cast time
             revertTime = AbilityCastTime.PostMove;
             this.abilityName = abilityName;
         }

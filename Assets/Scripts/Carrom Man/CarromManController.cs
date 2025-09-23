@@ -9,6 +9,7 @@ namespace GodsCarrom.CarromMan
         //MVC reference
         private CarromManView carromManView;
         private CarromManScriptableObject carromManSO;
+        private CarromManModel carromManModel;
 
         private PlayerController Owner;
 
@@ -20,6 +21,14 @@ namespace GodsCarrom.CarromMan
 
             carromManView.SetController(this);
             //SetColor();
+        }
+
+        public CarromManController( PlayerController Owner, CarromManModel model, CarromManView prefab)
+        {
+            carromManModel = model;
+            carromManView = GameObject.Instantiate(prefab);
+            this.Owner = Owner;
+            carromManView.SetController(this);
         }
 
         public PlayerNumber GetOwner() => Owner.GetPlayerNumber();
@@ -49,9 +58,11 @@ namespace GodsCarrom.CarromMan
         public float CalculateLaunchValue(Vector3 mousePosition, Vector3 position)
         {
             float distance = Mathf.Sqrt(Mathf.Pow(mousePosition.x - position.x, 2) + Mathf.Pow(mousePosition.y - position.y, 2));//better to multiply than us Math.Power of 2
-            float value = Mathf.InverseLerp(carromManSO.minRange, carromManSO.maxRange, distance);
+            //float value = Mathf.InverseLerp(carromManSO.minRange, carromManSO.maxRange, distance);
+            float value = Mathf.InverseLerp(carromManModel.minRange, carromManModel.maxRange, distance);
 
-            return Mathf.Lerp(carromManSO.minLaunchValue, carromManSO.maxLaunchValue, value);
+            //return Mathf.Lerp(carromManSO.minLaunchValue, carromManSO.maxLaunchValue, value);
+            return Mathf.Lerp(carromManModel.minLaunchValue, carromManModel.maxLaunchValue, value);
         }
 
         public float CalculateArrowAngle(Vector2 direction)
