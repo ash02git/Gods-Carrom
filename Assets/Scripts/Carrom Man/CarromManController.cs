@@ -1,5 +1,6 @@
 ﻿using GodsCarrom.Abilites;
 using GodsCarrom.Player;
+using System;
 using UnityEngine;
 
 namespace GodsCarrom.CarromMan
@@ -10,7 +11,7 @@ namespace GodsCarrom.CarromMan
         private CarromManView carromManView;
         private CarromManScriptableObject carromManSO;
 
-        private PlayerController Owner;
+        public PlayerController Owner;
 
         public CarromManController( PlayerController Owner, CarromManScriptableObject carromManSO, CarromManView carromPrefab)
         {
@@ -29,6 +30,8 @@ namespace GodsCarrom.CarromMan
         public PlayerController GetOwnerController() => Owner;
         
         public void SetPosition(Vector2 position) => carromManView.transform.position = position;
+
+        public CarromManView GetView() => carromManView;
 
         public void SetColor()
         {
@@ -91,9 +94,16 @@ namespace GodsCarrom.CarromMan
 
         public virtual void SetVelocity(Vector3 mousePos, Vector3 position, float aimValue)
         {
+            Debug.Log("Inside normal controller's SetVelocity");
             Debug.Log("Aim value is " + aimValue);
             Vector2 forceDirection = position - mousePos;
-            carromManView.SetVelocity(forceDirection.normalized * aimValue);
+            Owner.SetStrikingVelocity(mousePos, position, aimValue);
+            //carromManView.SetVelocity(forceDirection.normalized * aimValue);
+        }
+
+        public void ApplyVelocity(Vector3 strikingVelocity)
+        {
+            carromManView.SetVelocity(strikingVelocity);
         }
     }
 }

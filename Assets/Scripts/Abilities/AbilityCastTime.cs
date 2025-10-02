@@ -4,6 +4,7 @@ namespace GodsCarrom.Abilites
     {
         None,
         PreMove,
+        AffectingPiece,
         InMove,
         PostMove
     }

@@ -4,8 +4,10 @@ using GodsCarrom.Formations;
 using GodsCarrom.Gods;
 using GodsCarrom.Main;
 using GodsCarrom.Utilities;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GodsCarrom.Player
 {
@@ -21,6 +23,7 @@ namespace GodsCarrom.Player
         private GodName godName;
 
         private CarromManController strikingController;
+        private Vector3 strikingVelocity;
 
         public PlayerController(GodName godName, Sprite godSymbol, FormationScriptableObject formationSO, PlayerNumber playerNumber, CarromManScriptableObject carromSO, CarromManView carromPrefab) //PlayerScriptableObject pSO
         {
@@ -125,6 +128,19 @@ namespace GodsCarrom.Player
             {
                 c.SetLayer(v);
             }
+        }
+
+        public void SetStrikingVelocity(Vector3 mousePos, Vector3 position, float aimValue)
+        {
+            Debug.Log("Aim value is " + aimValue);
+            Vector2 forceDirection = position - mousePos;
+            strikingVelocity = forceDirection.normalized * aimValue;
+        }
+
+        public void ApplyVelocity()
+        {
+            Debug.Log("Applied velocity to striking controller");
+            strikingController.ApplyVelocity(strikingVelocity);
         }
     }
 }

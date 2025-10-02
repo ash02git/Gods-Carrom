@@ -11,7 +11,7 @@ namespace GodsCarrom.Abilites
         public PowerShotAbility(PlayerNumber playerNumber, AbilitiesEnum abilityName)
         {
             this.playerNumber = playerNumber;
-            castTime = AbilityCastTime.InMove;
+            castTime = AbilityCastTime.PreMove;//re setting as physics phase. originally InMove, now changed to PreMove
             revertTime = AbilityCastTime.PostMove;
             this.abilityName = abilityName;
         }

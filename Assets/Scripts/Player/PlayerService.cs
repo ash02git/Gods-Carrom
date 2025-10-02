@@ -92,5 +92,13 @@ namespace GodsCarrom.Player
             else if (playerNumber == PlayerNumber.Player2)
                 player2controller.ChangeLayerOfPieces(v);
         }
+
+        public void ApplyVelocity(PlayerNumber playerNumber)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                player1controller.ApplyVelocity();
+            else if (playerNumber == PlayerNumber.Player2)
+                player2controller.ApplyVelocity();
+        }
     }
 }

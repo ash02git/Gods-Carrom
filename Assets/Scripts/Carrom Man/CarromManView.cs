@@ -28,7 +28,10 @@ namespace GodsCarrom.CarromMan
         {
             //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
             if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
-                    direction_arrow.SetActive(true);
+            {
+                direction_arrow.SetActive(true);
+                //controller.GetOwnerController().SetStrikingPiece(controller);//this is new line
+            }
         }
 
         private void OnMouseDrag()
@@ -76,6 +79,8 @@ namespace GodsCarrom.CarromMan
 
                 
 
+                //controller.SetVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);
+                //controller.GetOwnerController().SetStrikingVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);
                 controller.SetVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);
                 //SetVelocity();
 
@@ -87,7 +92,7 @@ namespace GodsCarrom.CarromMan
 
                 //GameService.Instance.gameManager.phaseOver = true;
 
-                
+
                 //GameService.Instance.gameManager.StartMoveTimer();
             }
         }

@@ -25,18 +25,21 @@ namespace GodsCarrom.CarromMan
             abilityStatus[ability] = false;
         }
 
-        public override void SetVelocity(Vector3 vector3, Vector3 position, float aimValue)
+        public override void SetVelocity(Vector3 mousePos, Vector3 position, float aimValue)
         {
-            Debug.Log("Inside thor piece controller");
+            Debug.Log("Inside thor piece controller's SetVelocity");
             if (abilityStatus[AbilitiesEnum.PowerShot] == true)
             {
                 Debug.Log("Power shot is done");
-                base.SetVelocity(vector3, position, aimValue * 2.0f);
+                //Owner.SetStrikingVelocity(mousePos, position, aimValue * 2.0f);
+                base.SetVelocity(mousePos, position, aimValue * 2.0f);
+                //GetView().SetVelocity(mousePos, position, aimValue * 2.0f);
             }
             else
             {
                 Debug.Log("Normal shot is done");
-                base.SetVelocity(vector3, position, aimValue);
+                base.SetVelocity(mousePos, position, aimValue);
+                //Owner.SetStrikingVelocity(mousePos, position, aimValue);
             }
                 
         }
