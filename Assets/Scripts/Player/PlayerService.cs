@@ -48,9 +48,6 @@ namespace GodsCarrom.Player
 
         public void CreatePlayers(GameplayScriptableObject gameplaySO)
         {
-            player1controller = new PlayerController(gameplaySO.p1GodSO.godName, gameplaySO.p1GodSO.godSymbol, gameplaySO.p1FormationSO, PlayerNumber.Player1, gameplaySO.carromSO, carromPrefab);
-            player2controller = new PlayerController(gameplaySO.p2GodSO.godName, gameplaySO.p2GodSO.godSymbol, gameplaySO.p2FormationSO, PlayerNumber.Player2, gameplaySO.carromSO, carromPrefab);
-
             player1controller = new PlayerController(PlayerNumber.Player1 ,gameplaySO.p1GodSO, gameplaySO.p1FormationSO, gameplaySO.carromSO, carromPrefab);
             player2controller = new PlayerController(PlayerNumber.Player2, gameplaySO.p2GodSO, gameplaySO.p2FormationSO, gameplaySO.carromSO, carromPrefab);
         }
@@ -97,6 +94,30 @@ namespace GodsCarrom.Player
                 player2controller.ChangeLayerOfPieces(v);
         }
 
+        public void HideAllPieces(PlayerNumber playerNumber)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                player1controller.HideAllPieces();
+            else if (playerNumber == PlayerNumber.Player2)
+                player2controller.HideAllPieces();
+        }
+
+        public void ShowAllPieces(PlayerNumber playerNumber)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                player1controller.ShowAllPieces();
+            else if (playerNumber == PlayerNumber.Player2)
+                player2controller.ShowAllPieces();
+        }
+
+        public void SpawnCarromMen(PlayerNumber playerNumber, int numOfPiecesToBeResurrected, float v)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                player1controller.SpawnCarromMen(numOfPiecesToBeResurrected, carromPrefab, v);
+            else if (playerNumber == PlayerNumber.Player2)
+                player1controller.SpawnCarromMen(numOfPiecesToBeResurrected, carromPrefab, v);
+        }
+
         //public AbilityNameAndClass GetAbilityClassAndName(PlayerNumber playerNumber, AbilitiesEnum abilityName)
         //{
         //    if (playerNumber == PlayerNumber.Player1)
@@ -104,5 +125,14 @@ namespace GodsCarrom.Player
         //    else if (playerNumber == PlayerNumber.Player2)
         //        player2controller.GetAbilityClassAndName(abilityName);
         //}
+
+        public void StrikePiece(PlayerNumber playerNumber)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                player1controller.StrikeThePiece();
+            else if (playerNumber == PlayerNumber.Player2)
+                player2controller.StrikeThePiece();
+
+        }
     }
 }

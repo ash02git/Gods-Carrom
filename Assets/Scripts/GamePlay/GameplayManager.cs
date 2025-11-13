@@ -1,13 +1,12 @@
 ﻿using GodsCarrom.Abilites;
 using GodsCarrom.Main;
 using GodsCarrom.Player;
-using System;
 using System.Collections;
 using UnityEngine;
 
 namespace GodsCarrom.Gameplay
 {
-    public class Manager : MonoBehaviour
+    public class GameplayManager : MonoBehaviour
     {
         private GameplayPhase currentPhase;
         private PlayerNumber currentTurn;
@@ -41,29 +40,25 @@ namespace GodsCarrom.Gameplay
             {
                 currentTurn = PlayerNumber.Player1;
                 Debug.Log("Player 1's turn has started");
-                //GameService.Instance.EventService.OnTurnStarted.InvokeEvent(currentTurn);
+
                 currentPhase = GameplayPhase.AbilitySelectionPhase;
                 yield return StartCoroutine(HandleTurn(currentTurn));
+
                 Debug.Log("Player 1's turn has ended");
 
                 currentTurn = PlayerNumber.Player2;
                 Debug.Log("Player 2's turn has started");
-                //GameService.Instance.EventService.OnTurnStarted.InvokeEvent(currentTurn);
+
                 currentPhase = GameplayPhase.AbilitySelectionPhase;
                 yield return StartCoroutine(HandleTurn(currentTurn));
+
                 Debug.Log("Player 2's turn has ended");
             }
         }
 
         private IEnumerator HandleTurn(PlayerNumber playerNumber)
         {
-            GameService.Instance.EventService.OnTurnStarted.InvokeEvent(currentTurn);//this is the first thing in a move
-            //while (currentPhase != GameplayPhase.TurnCompletedPhase)
-            //{
-            //    //yield return StartCoroutine(PhaseCoroutine());
-            //    yield return StartCoroutine(HandlePhases());
-            //}
-
+            GameService.Instance.EventService.OnTurnStarted.InvokeEvent(currentTurn);
             yield return StartCoroutine(HandlePhases());
         }
 
@@ -89,7 +84,7 @@ namespace GodsCarrom.Gameplay
             //check condition for potted
 
             yield return StartCoroutine(PreMovePhase());
-            yield return StartCoroutine(PlayerPhase());
+            yield return StartCoroutine(PlayerPhase()); 
             yield return StartCoroutine(InMovePhase());
             yield return StartCoroutine(PhysicsPhase());
             yield return StartCoroutine(PostMovePhase());
@@ -98,14 +93,14 @@ namespace GodsCarrom.Gameplay
 
         private IEnumerator AbilitySelectionPhase()
         {
-            //Debug.Log("Ability Selection Phase started");
+            Debug.Log("Ability Selection Phase started");
 
             GameService.Instance.UIService.TurnOffAbilityBlocker(currentTurn);
 
             yield return new WaitUntil(() => phaseOver == true);
 
             GameService.Instance.UIService.TurnOnAbilityBlocker(currentTurn);
-            //Debug.Log("Ability Selection Phase ended");
+            Debug.Log("Ability Selection Phase ended");
 
             phaseOver = false;//resetting phaseOver to false
         }
@@ -121,22 +116,20 @@ namespace GodsCarrom.Gameplay
 
         private IEnumerator PreMovePhase()
         {
-            //Debug.Log("PreMove Phase started");
+            Debug.Log("PreMove Phase started");
 
-            //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
-            //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
             GameService.Instance.AbilityService.PerformAbilityUpdates(AbilityCastTime.PreMove);
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            //Debug.Log("PreMove Phase ended");
+            Debug.Log("PreMove Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator PlayerPhase()
         {
-            //Debug.Log("Player Phase started");
+            Debug.Log("Player Phase started");
 
             GameService.Instance.BoardService.TurnOffBlocker();
 
@@ -153,44 +146,41 @@ namespace GodsCarrom.Gameplay
         {
             Debug.Log("InMove Phase started");
 
-            //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
-            //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
             GameService.Instance.AbilityService.PerformAbilityUpdates(AbilityCastTime.InMove);
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            Debug.Log("InMove Phase ended");
+            Debug.Log("InMove Phase ended"); 
 
             phaseOver = false;
         }
 
         private IEnumerator PhysicsPhase()
         {
-            //Debug.Log("Physics Move Phase started");
+            Debug.Log("Physics Move Phase started");
 
-            //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
-            //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
+            GameService.Instance.PlayerService.StrikePiece(currentTurn);
+
+            GameService.Instance.AbilityService.PerformAbilityUpdates(AbilityCastTime.PhysicsMove);
 
             StartCoroutine(MoveTimer());
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            //Debug.Log("Physics Phase ended");
+            Debug.Log("Physics Phase ended");
 
             phaseOver = false;
         }
 
         private IEnumerator PostMovePhase()
         {
-            //Debug.Log("PostMove Phase started");
+            Debug.Log("PostMove Phase started");
 
-            //GameService.Instance.AbilityService.CheckAndCastAbilityNew(AbilityCastTime.PreMove);
-            //GameService.Instance.AbilityService.CheckAndRevertAbilityNew(AbilityCastTime.PreMove);
             GameService.Instance.AbilityService.PerformAbilityUpdates(AbilityCastTime.PostMove);
 
             yield return new WaitUntil(() => phaseOver == true);
 
-            //Debug.Log("PostMove Phase ended");
+            Debug.Log("PostMove Phase ended");
 
             phaseOver = false;
         }

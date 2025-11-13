@@ -6,6 +6,7 @@ namespace GodsCarrom.Abilites
         PreMove,
         PlayerMove,
         InMove,
+        PhysicsMove,
         PostMove
     }
 }

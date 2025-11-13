@@ -11,11 +11,19 @@ namespace GodsCarrom.CarromMan
 
         public JesusPieceController(PlayerController owner, CarromManScriptableObject carromSO, CarromManView view) : base(owner, carromSO, view)
         {
+            Debug.Log("Jesus piece controller is created");
+            abilityStatus.Add(AbilitiesEnum.WaterToWine, false);
+        }
+
+        public JesusPieceController(PlayerController owner, CarromManModel carromManModel, CarromManView view) : base(owner, carromManModel, view)
+        {
+            Debug.Log("Jesus piece controller is created");
             abilityStatus.Add(AbilitiesEnum.WaterToWine, false);
         }
 
         public override void ActivateAbility(AbilitiesEnum ability)
         {
+            Debug.Log(ability.ToString() + " is activated for striking controller");
             abilityStatus[ability] = true;
         }
 
@@ -30,6 +38,8 @@ namespace GodsCarrom.CarromMan
 
             if (abilityStatus[AbilitiesEnum.WaterToWine] == true)
             {
+                Debug.Log("Water to wine collission is happening");
+
                 CarromManController collidedController = null;
                 //CarromManController collidedController = collidedObject.GetComponent<CarromManView>().GetController();
                 if (collidedObject.GetComponent<CarromManView>() != null)

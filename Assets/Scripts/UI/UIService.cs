@@ -66,6 +66,7 @@ namespace GodsCarrom.UI
         public void CreateGameplayUI(GodScriptableObject p1GodSO, GodScriptableObject p2GodSO)
         {
             gameplayUIController.InitializePlayersUIView(p1GodSO, p2GodSO);
+            //gameplayUIView.gameObject.SetActive(true);
         }
 
         public void TurnOnAbilityBlocker(PlayerNumber currentTurn)

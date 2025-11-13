@@ -20,11 +20,14 @@ namespace GodsCarrom.Board
         private List<HoleView> holes;
         private List<CarromManController> pottedPieces;
 
-        public BoardService(BoardController boardPrefab,HoleView holePrefab, HoleData holeData)
+        private GameObject viewObstructor;
+
+        public BoardService(BoardController boardPrefab,HoleView holePrefab, HoleData holeData, GameObject viewObstructor)
         {
             this.boardPrefab = boardPrefab;
             this.holePrefab = holePrefab;
             this.holeData = holeData;
+            this.viewObstructor = viewObstructor;
 
             holes = new List<HoleView>();
             pottedPieces = new List<CarromManController>();
@@ -90,5 +93,8 @@ namespace GodsCarrom.Board
 
         public void TurnOnBlocker() => board.TurnOnBlocker();
         public void TurnOffBlocker() => board.TurnOffBlocker();
+
+        public void TurnOnObstructor() => viewObstructor.SetActive(true);
+        public void TurnOffObstructor() => viewObstructor.SetActive(false);
     }
 }

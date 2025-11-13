@@ -1,5 +1,6 @@
 ﻿using GodsCarrom.Abilites;
 using GodsCarrom.Player;
+using System;
 using UnityEngine;
 
 namespace GodsCarrom.CarromMan
@@ -90,6 +91,11 @@ namespace GodsCarrom.CarromMan
             //Debug.Log("Collided");
         }
 
+        public virtual void ProcessTrigger(GameObject triggeredObject)
+        {
+
+        }
+
         public virtual void ActivateAbility(AbilitiesEnum abilityName)
         {
             Debug.Log("Ability is activated for striking controller");
@@ -105,6 +111,32 @@ namespace GodsCarrom.CarromMan
             Debug.Log("Aim value is " + aimValue);
             Vector2 forceDirection = position - mousePos;
             carromManView.SetVelocity(forceDirection.normalized * aimValue);
+        }
+
+        public virtual void SetVelocity(Vector2 velocity)
+        {
+            Debug.Log("THe velocity is " + velocity);
+            carromManView.SetVelocity(velocity);
+        }
+
+        public void HidePiece()
+        {
+            carromManView.HidePiece();
+        }
+
+        public void ShowPiece()
+        {
+            carromManView.ShowPiece();
+        }
+
+        public void SetScale(float v)
+        {
+            carromManView.SetScale(v);
+        }
+
+        public void SetMass(float mass)
+        {
+            carromManView.SetMass(mass);
         }
     }
 }

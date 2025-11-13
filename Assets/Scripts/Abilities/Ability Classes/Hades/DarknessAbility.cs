@@ -1,4 +1,6 @@
-﻿using GodsCarrom.Player;
+﻿using GodsCarrom.Board;
+using GodsCarrom.Main;
+using GodsCarrom.Player;
 using UnityEngine;
 
 namespace GodsCarrom.Abilites
@@ -18,11 +20,13 @@ namespace GodsCarrom.Abilites
         public override void OnAbilityCast()
         {
             Debug.Log(abilityName.ToString() + " is cast");
+            GameService.Instance.BoardService.TurnOnObstructor();
         }
 
         public override void OnAbilityReverted()
         {
             Debug.Log(abilityName.ToString() + " is reverted");
+            GameService.Instance.BoardService.TurnOffObstructor();
         }
     }
 }

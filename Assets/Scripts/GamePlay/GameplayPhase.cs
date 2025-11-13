@@ -1,10 +1,9 @@
-namespace GodsCarrom.Gameplay
+ namespace GodsCarrom.Gameplay
 {
     public enum GameplayPhase
     {
         None,
         AbilitySelectionPhase,
-        AbilityProcessingPhase,
         PreMovePhase,
         PlayerPhase,//the phase where the player decides which piece to shoot and the angle and power.
         InMovePhase,

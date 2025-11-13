@@ -2,7 +2,7 @@
 
 namespace GodsCarrom.Utilities
 {
-    public class GenericMonoSingleton<T> : MonoBehaviour where T : GenericMonoSingleton<T>
+    public class  GenericMonoSingleton<T> : MonoBehaviour where T : GenericMonoSingleton<T>
     {
         private static T instance;
 

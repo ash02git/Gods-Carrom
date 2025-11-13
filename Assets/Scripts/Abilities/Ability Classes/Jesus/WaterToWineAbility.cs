@@ -11,7 +11,7 @@ namespace GodsCarrom.Abilites
         public WaterToWineAbility(PlayerNumber playerNumber, AbilitiesEnum abilityName)
         {
             this.playerNumber = playerNumber;
-            castTime = AbilityCastTime.InMove;
+            castTime = AbilityCastTime.InMove;//actually InMove, changed to PhysicsMove
             revertTime = AbilityCastTime.PostMove;
             this.abilityName = abilityName;
         }

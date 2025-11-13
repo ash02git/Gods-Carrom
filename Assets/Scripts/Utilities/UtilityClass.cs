@@ -30,7 +30,22 @@ namespace GodsCarrom.Utilities
                     return new ThorPieceController(playerController, carromSO, prefab);
 
                 default:
-                    return new JesusPieceController(playerController, carromSO, prefab);
+                    return new CarromManController(playerController, carromSO, prefab);
+            }
+        }
+
+        public static CarromManController CreateSpecificCarromMan(PlayerController playerController, CarromManModel carromManModel, CarromManView prefab, GodName godName)
+        {
+            switch (godName)
+            {
+                case GodName.Jesus:
+                    return new JesusPieceController(playerController, carromManModel, prefab);
+
+                case GodName.Thor:
+                    return new ThorPieceController(playerController, carromManModel, prefab);
+
+                default:
+                    return new CarromManController(playerController, carromManModel, prefab);
             }
         }
 

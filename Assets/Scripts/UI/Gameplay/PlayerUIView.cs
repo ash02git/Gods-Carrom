@@ -28,7 +28,11 @@ namespace GodsCarrom.UI
 
         public Transform GetAbilitiesParent() => abilitiesParent;
 
-        public void TurnOnAbilityTimerUI() => useAbilityUI.gameObject.SetActive(true);
+        public void TurnOnAbilityTimerUI() //=> useAbilityUI.gameObject.SetActive(true);
+        {
+            useAbilityUI.gameObject.SetActive(true);
+            //Debug.Log(controller.pl);
+        }
 
         public void TurnOnAbilityBlocker() => abilityBlocker.SetActive(true);
 

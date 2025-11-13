@@ -48,7 +48,8 @@ namespace GodsCarrom.Abilites
 
             toBeCasted.Add(package);
 
-            GameService.Instance.gameManager.phaseOver = true;//ability is processed and stored in to be casted
+            //GameService.Instance.gameManager.phaseOver = true;//ability is processed and stored in to be casted
+            GameService.Instance.GameplayService.phaseOver = true;//ability is processed and stored in to be casted
         }
 
         public void PerformAbilityUpdates(AbilityCastTime castTime)
@@ -56,14 +57,16 @@ namespace GodsCarrom.Abilites
             CheckAndRevertAbilityNew(castTime);
             CheckAndCastAbilityNew(castTime);
 
-            GameService.Instance.gameManager.phaseOver = true;
+            //wait for ability cast time and animations then do phaseOver = true;
+
+            //GameService.Instance.gameManager.phaseOver = true;
+            GameService.Instance.GameplayService.phaseOver = true;
         }
 
         public void CheckAndCastAbilityNew(AbilityCastTime castTime)
         {
             if(toBeCasted.Count > 0)
             {
-
                 List<AbilityPackage> toBeRemoved = new List<AbilityPackage>();
 
                 foreach(AbilityPackage a in toBeCasted)

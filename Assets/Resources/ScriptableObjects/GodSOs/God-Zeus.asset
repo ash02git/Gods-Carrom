@@ -18,10 +18,10 @@ MonoBehaviour:
   godSymbol: {fileID: 21300000, guid: 31c09fbf09e0a7c4a960fea7820fb524, type: 3}
   abilities:
   - abilityName: 15
-    castTime: 0
-    revertTime: 0
+    castTime: 5
+    revertTime: 3
   - abilityName: 16
-    castTime: 0
+    castTime: 1
     revertTime: 0
   - abilityName: 17
     castTime: 0

@@ -27,7 +27,7 @@ namespace GodsCarrom.Events
 
 
         public EventController OnAbilitySelected { get; private set; }
-        public EventController OnAbilityNotSelected { get; private set; }
+        //public EventController OnAbilityNotSelected { get; private set; }
 
         public EventController<PlayerNumber> OnTurnStarted { get; private set; }
 

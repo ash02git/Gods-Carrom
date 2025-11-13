@@ -6,6 +6,7 @@ using GodsCarrom.Main;
 using GodsCarrom.Utilities;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GodsCarrom.Player
@@ -17,39 +18,65 @@ namespace GodsCarrom.Player
 
         private CarromManScriptableObject carromSO;
 
-        private GameObject playerParent;//new line
+        //private GameObject playerParent;//new line
         private Sprite godSymbol;
         private GodName godName;
 
         private CarromManController strikingController;
+        private Vector2 strikingVelocity;
         public God chosenGod;//player has a reference to god
-
-        public PlayerController(GodName godName, Sprite godSymbol, FormationScriptableObject formationSO, PlayerNumber playerNumber, CarromManScriptableObject carromSO, CarromManView carromPrefab) //PlayerScriptableObject pSO
-        {
-            this.playerNumber = playerNumber;
-            this.godName = godName;
-            this.godSymbol = godSymbol;
-            carromMen = new List<CarromManController>();
-            this.carromSO = carromSO;
-            this.carromSO.SetOwner(playerNumber);
-
-            CreateCarromMen(formationSO, this.carromSO, carromPrefab);
-        }
 
         public PlayerController(PlayerNumber playerNumber, GodScriptableObject godSO, FormationScriptableObject formationSO, CarromManScriptableObject carromSO, CarromManView carromPrefab)
         {
             this.playerNumber = playerNumber;
             this.godName = godSO.godName;
             this.godSymbol = godSO.godSymbol;
+            this.carromSO = carromSO;
             
             carromMen = new List<CarromManController>();
-            CreateCarromMen(formationSO, carromSO, carromPrefab);
+            //CreateCarromMen(formationSO, carromSO, carromPrefab);
+            CreateCarromMen(formationSO, godSO, carromSO, carromPrefab);
+        }
+
+        private void CreateCarromMen(FormationScriptableObject formationSO, GodScriptableObject godSO, CarromManScriptableObject carromSO, CarromManView carromPrefab)
+        {
+            foreach (Vector2 position in formationSO.positions)
+            {
+                CarromManModel carromModel = new CarromManModel(carromSO);
+
+                carromModel.SetOwner(playerNumber);
+
+                //CarromManController newCarromMan = new CarromManController(this, carromModel, carromPrefab);
+                //CarromManController newCarromMan = UtilityClass.CreateSpecificCarromMan(this, carromSO, carromPrefab, godSO.godName);
+                CarromManController newCarromMan = UtilityClass.CreateSpecificCarromMan(this, carromModel, carromPrefab, godSO.godName);
+                newCarromMan.SetSprite(godSymbol);
+
+                if (playerNumber == PlayerNumber.Player1)
+                    newCarromMan.SetPosition(position);
+                else if (playerNumber == PlayerNumber.Player2)
+                    newCarromMan.SetPosition(new Vector2(position.x, -position.y));
+
+                carromMen.Add(newCarromMan);
+            }
         }
 
         public void SetStrikingPiece(CarromManController controller)// => strikingController = controller;
         {
             Debug.Log("Striking piece is set");
             strikingController = controller;
+        }
+
+        public void SetStrikingVelocity(Vector3 mousePos, Vector3 position, float aimValue)
+        {
+            Debug.Log("Aim value is " + aimValue);
+            Vector2 forceDirection = position - mousePos;
+
+            strikingVelocity = forceDirection.normalized * aimValue;
+        }
+
+        public void StrikeThePiece()
+        {
+            strikingController.SetVelocity(strikingVelocity); 
         }
 
         public void SetPlayerNumber(PlayerNumber playerNumber) => this.playerNumber = playerNumber;
@@ -60,15 +87,10 @@ namespace GodsCarrom.Player
         {
             foreach(Vector2 position in formationSO.positions)
             {
-                //CarromManScriptableObject newCarromSO = ScriptableObject.CreateInstance<CarromManScriptableObject>();
                 CarromManModel carromModel = new CarromManModel(carromSO);
+
                 carromModel.SetOwner(playerNumber);
-                //newCarromSO.CopyFrom(carromSO);
 
-                //CarromManController newCarromMan = new CarromManController(this, newCarromSO, carromPrefab);
-                //newCarromMan.SetSprite(godSymbol);
-
-                //CarromManController newCarromMan = UtilityClass.CreateSpecificCarromMan(this, newCarromSO, carromPrefab, godName); - commented for change
                 CarromManController newCarromMan = new CarromManController(this, carromModel, carromPrefab);
                 newCarromMan.SetSprite(godSymbol);
 
@@ -100,11 +122,17 @@ namespace GodsCarrom.Player
         {
             for(int i=1; i<=num; i++)
             {
-                CarromManScriptableObject newCarromSO = ScriptableObject.CreateInstance<CarromManScriptableObject>();
-                newCarromSO.CopyFrom(carromSO);
+                //CarromManScriptableObject newCarromSO = ScriptableObject.CreateInstance<CarromManScriptableObject>();
+                //newCarromSO.CopyFrom(carromSO);
+
+                CarromManModel carromManModel = new CarromManModel(carromSO);
+                carromManModel.SetOwner(playerNumber);
+
+                CarromManController newCarromMan = new CarromManController(this, carromManModel, carromPrefab);
+                newCarromMan.SetSprite(godSymbol);
 
                 //CarromManController newCarromMan = new CarromManController(this, newCarromSO, carromPrefab);
-                CarromManController newCarromMan = UtilityClass.CreateSpecificCarromMan(this, newCarromSO, carromPrefab, godName);
+                //CarromManController newCarromMan = UtilityClass.CreateSpecificCarromMan(this, newCarromSO, carromPrefab, godName);
 
                 carromMen.Add(newCarromMan);
 
@@ -146,5 +174,45 @@ namespace GodsCarrom.Player
         {
             chosenGod.GetAbilityClassAndName(abilityName);
         }
+
+        public void HideAllPieces()
+        {
+            foreach(CarromManController carrom in carromMen)
+            {
+                carrom.HidePiece();
+            }
+        }
+
+        public void ShowAllPieces()
+        {
+            foreach(CarromManController carrom in carromMen)
+            {
+                carrom.ShowPiece();
+            }
+        }
+
+        public void SpawnCarromMen(int num , CarromManView carromPrefab, float v)
+        {
+            for (int i = 1; i <= num; i++)
+            {
+                //CarromManScriptableObject newCarromSO = ScriptableObject.CreateInstance<CarromManScriptableObject>();
+                //newCarromSO.CopyFrom(carromSO);
+
+                CarromManModel carromManModel = new CarromManModel(carromSO);
+                carromManModel.SetOwner(playerNumber);
+
+                CarromManController newCarromMan = new CarromManController(this, carromManModel, carromPrefab);
+                newCarromMan.SetSprite(godSymbol);
+
+                //CarromManController newCarromMan = new CarromManController(this, newCarromSO, carromPrefab);
+                //CarromManController newCarromMan = UtilityClass.CreateSpecificCarromMan(this, newCarromSO, carromPrefab, godName);
+
+                carromMen.Add(newCarromMan);
+
+                newCarromMan.SetPosition(GameService.Instance.BoardService.GetRandomPositionFromSpawnArea());
+                newCarromMan.SetScale(v);
+            }
+        }
+
     }
 }

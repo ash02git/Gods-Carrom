@@ -27,11 +27,12 @@ namespace GodsCarrom.UI
 
         private void OnCancelClicked()
         {
-            //Debug.Log("Ability was not selected");
+            Debug.Log("Ability was not selected");
             StopCoroutine(coroutine);
             gameObject.SetActive(false);
 
-            GameService.Instance.gameManager.phaseOver = true;//inidicating that phase is over
+            //GameService.Instance.gameManager.phaseOver = true;//inidicating that phase is over
+            GameService.Instance.GameplayService.phaseOver = true;//inidicating that phase is over
 
             //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.PlayerPhase);
             //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.PreMovePhase);//new pathing
@@ -39,11 +40,12 @@ namespace GodsCarrom.UI
 
         public void OnAbilitySelected()
         {
-            //Debug.Log("Ability was selected");
+            Debug.Log("Ability was selected");
             StopCoroutine(coroutine);
             gameObject.SetActive(false);
 
             //GameService.Instance.gameManager.phaseOver = true;//inidicating that phase is over
+            GameService.Instance.GameplayService.phaseOver = true;
         }
 
         //maybe not needed

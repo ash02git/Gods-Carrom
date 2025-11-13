@@ -19,13 +19,13 @@ namespace GodsCarrom.Abilites
         public override void OnAbilityCast()
         {
             Debug.Log(abilityName.ToString() + " is cast");
-            GameService.Instance.PlayerService.ActivateAbility(playerNumber, AbilitiesEnum.WaterToWine);
+            GameService.Instance.PlayerService.ActivateAbility(playerNumber, AbilitiesEnum.PowerShot);
         }
 
         public override void OnAbilityReverted()
         {
             Debug.Log(abilityName.ToString() + " is reverted");
-            GameService.Instance.PlayerService.DeactivateAbility(playerNumber, AbilitiesEnum.WaterToWine);
+            GameService.Instance.PlayerService.DeactivateAbility(playerNumber, AbilitiesEnum.PowerShot);
         }
     }
 }

@@ -21,8 +21,8 @@ MonoBehaviour:
     castTime: 3
     revertTime: 4
   - abilityName: 4
-    castTime: 2
-    revertTime: 4
+    castTime: 3
+    revertTime: 5
   - abilityName: 5
-    castTime: 0
-    revertTime: 0
+    castTime: 3
+    revertTime: 5

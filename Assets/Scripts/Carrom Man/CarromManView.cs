@@ -26,15 +26,15 @@ namespace GodsCarrom.CarromMan
 
         private void OnMouseDown()
         {
-            //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
-            if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
-                    direction_arrow.SetActive(true);
+            if (GameService.Instance.GameplayService.GetCurrentTurn() == controller.GetOwner())
+                direction_arrow.SetActive(true);
         }
 
         private void OnMouseDrag()
         {
             //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
-            if(GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
+            //if(GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
+            if (GameService.Instance.GameplayService.GetCurrentTurn() == controller.GetOwner())
             {
                 Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 //Vector3 mousePosition = Input.mousePosition;
@@ -52,6 +52,11 @@ namespace GodsCarrom.CarromMan
             controller.ProcessCollission(collision.gameObject);
         }
 
+        private void OnTriggerEnter2D(Collider2D trigger)
+        {
+            controller.ProcessTrigger(trigger.gameObject);
+        }
+
         private void UpdateAimSliderValue(Vector3 mousePosition, Vector3 position)
         {
             aimSlider.value =  controller.CalculateLaunchValue(mousePosition, position);
@@ -65,18 +70,17 @@ namespace GodsCarrom.CarromMan
 
         private void OnMouseUp()
         {
-            GameService.Instance.gameManager.phaseOver = true;//phaseOver is done first so that InMove can happen
+            //GameService.Instance.GameplayService.phaseOver = true;//phaseOver is done first so that InMove can happen
             Debug.Log("Set Player Phase as over");
             controller.GetOwnerController().SetStrikingPiece(controller);
-            
-            //if (GameService.Instance.GameplayService.GetTurn() == controller.GetOwner())
-            if (GameService.Instance.gameManager.GetTurn() == controller.GetOwner())
+
+            if (GameService.Instance.GameplayService.GetCurrentTurn() == controller.GetOwner())
             {
                 direction_arrow.SetActive(false);
 
-                
+                //controller.SetVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);
 
-                controller.SetVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);
+                controller.GetOwnerController().SetStrikingVelocity(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position, aimSlider.value);// this is a new line
                 //SetVelocity();
 
                 //GameService.Instance.GameplayService.SetTurn(PlayerNumber.None);
@@ -85,7 +89,7 @@ namespace GodsCarrom.CarromMan
 
                 //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.InMovePhase);
 
-                //GameService.Instance.gameManager.phaseOver = true;
+                GameService.Instance.GameplayService.phaseOver = true;
 
                 
                 //GameService.Instance.gameManager.StartMoveTimer();
@@ -105,5 +109,26 @@ namespace GodsCarrom.CarromMan
         public CarromManController GetController() => controller;
 
         public void SetSprite(Sprite godSymbol) => GetComponent<SpriteRenderer>().sprite = godSymbol;
+
+        public void HidePiece()
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        public void ShowPiece()
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        public void SetScale(float v)
+        {
+            transform.localScale = new Vector2(v, v);
+            //maybe also change the mass to half
+        }
+
+        public void SetMass(float mass)
+        {
+            rigidbody_2d.mass = mass;
+        }
     }
 }

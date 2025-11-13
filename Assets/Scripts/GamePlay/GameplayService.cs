@@ -10,20 +10,10 @@ namespace GodsCarrom.Gameplay
 {
     public class GameplayService
     {
-        //private PlayerNumber currentTurn; //to indicate which player is currently playing
-        //private PlayerNumber previousTurn; // to indicate which player was previously playing
-
-        //private AbilityCastTime currentPhase; //change this to PhaseEnum later, used to store current phase of the Move/Turn.
-
         private GameplayScriptableObject gameplaySO;
 
         public GameplayService(GameplayScriptableObject gameplaySO)
         {
-            //SetTurn(PlayerNumber.Player1);
-            //currentTurn = PlayerNumber.Player1;
-            //previousTurn = PlayerNumber.Player2;
-
-            SubscribeToEvents();
             this.gameplaySO = gameplaySO;
         }
 
@@ -31,6 +21,8 @@ namespace GodsCarrom.Gameplay
         {
             gameplaySO.p1FormationSO = null;
             gameplaySO.p2FormationSO = null;
+            gameplaySO.p1GodSO = null;
+            gameplaySO.p2GodSO = null;
         }
 
         public void SetFormationSOs(FormationEnum p1Formation, FormationEnum p2Formation)
@@ -50,7 +42,7 @@ namespace GodsCarrom.Gameplay
             GameService.Instance.BoardService.CreateBoard();
             GameService.Instance.PlayerService.CreatePlayers(gameplaySO);
             GameService.Instance.UIService.CreateGameplayUI(gameplaySO.p1GodSO, gameplaySO.p2GodSO);
-            GameService.Instance.TurnOnManager();
+            //GameService.Instance.TurnOnManager(); -- commented regarding code architecture change
         }
 
         public void GameLoop()
@@ -69,13 +61,6 @@ namespace GodsCarrom.Gameplay
         private async Task PhaseTimer()
         {
             await Task.Delay(4000); 
-        }
-
-        private void SubscribeToEvents()
-        {
-            //GameService.Instance.EventService.OnPointScored.AddListener(CheckGameOver);
-            //GameService.Instance.EventService.OnPhaseCompleted.AddListener(ChangePhase);
-            //GameService.Instance.EventService.OnMoveCompleted.AddListener(ChangeTurn);
         }
 
         private void CheckGameOver()
