@@ -3,7 +3,6 @@ using GodsCarrom.Hole;
 using GodsCarrom.Main;
 using GodsCarrom.Player;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
 namespace GodsCarrom.Board
@@ -15,17 +14,20 @@ namespace GodsCarrom.Board
         private HoleView holePrefab;
         private HoleData holeData;
 
-        //service related data
+        //service related data - maybe add the board blocker reference here, can eliminate one script
         private BoardController board;
         private PolygonCollider2D collider;
         private List<HoleView> holes;
         private List<CarromManController> pottedPieces;
 
-        public BoardService(BoardController boardPrefab,HoleView holePrefab, HoleData holeData)
+        private GameObject viewObstructor;
+
+        public BoardService(BoardController boardPrefab,HoleView holePrefab, HoleData holeData, GameObject viewObstructor)
         {
             this.boardPrefab = boardPrefab;
             this.holePrefab = holePrefab;
             this.holeData = holeData;
+            this.viewObstructor = viewObstructor;
 
             holes = new List<HoleView>();
             pottedPieces = new List<CarromManController>();
@@ -91,5 +93,8 @@ namespace GodsCarrom.Board
 
         public void TurnOnBlocker() => board.TurnOnBlocker();
         public void TurnOffBlocker() => board.TurnOffBlocker();
+
+        public void TurnOnObstructor() => viewObstructor.SetActive(true);
+        public void TurnOffObstructor() => viewObstructor.SetActive(false);
     }
 }

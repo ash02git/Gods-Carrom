@@ -4,7 +4,9 @@ namespace GodsCarrom.Abilites
     {
         None,
         PreMove,
+        PlayerMove,
         InMove,
+        PhysicsMove,
         PostMove
     }
 }

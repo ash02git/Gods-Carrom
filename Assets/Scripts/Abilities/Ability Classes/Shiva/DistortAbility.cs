@@ -1,4 +1,6 @@
-﻿using GodsCarrom.Player;
+﻿using GodsCarrom.Main;
+using GodsCarrom.Player;
+using System.Collections;
 using UnityEngine;
 
 namespace GodsCarrom.Abilites
@@ -18,11 +20,19 @@ namespace GodsCarrom.Abilites
         public override void OnAbilityCast()
         {
             Debug.Log(abilityName.ToString() + " is cast");
+            GameService.Instance.CameraService.PlayDistortAnim();
         }
 
         public override void OnAbilityReverted()
         {
             Debug.Log(abilityName.ToString() + " is reverted");
+            GameService.Instance.CameraService.RevertDistortAnim();
+        }
+
+        IEnumerator AnimationWaitTimer()
+        {
+            yield return new WaitForSeconds(2.0f);
+
         }
     }
 }

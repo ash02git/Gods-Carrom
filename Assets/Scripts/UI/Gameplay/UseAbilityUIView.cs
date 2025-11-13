@@ -31,7 +31,8 @@ namespace GodsCarrom.UI
             StopCoroutine(coroutine);
             gameObject.SetActive(false);
 
-            GameService.Instance.gameManager.phaseOver = true;//inidicating that phase is over
+            //GameService.Instance.gameManager.phaseOver = true;//inidicating that phase is over
+            GameService.Instance.GameplayService.phaseOver = true;//inidicating that phase is over
 
             //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.PlayerPhase);
             //GameService.Instance.gameManager.SetNewPhase(GameplayPhase.PreMovePhase);//new pathing
@@ -44,6 +45,7 @@ namespace GodsCarrom.UI
             gameObject.SetActive(false);
 
             //GameService.Instance.gameManager.phaseOver = true;//inidicating that phase is over
+            GameService.Instance.GameplayService.phaseOver = true;
         }
 
         //maybe not needed
@@ -60,7 +62,7 @@ namespace GodsCarrom.UI
 
         private IEnumerator UseAbilityTimer()
         {
-            Debug.Log("Ability Selection Started");
+            //Debug.Log("Ability Selection Started");
             yield return new WaitForSeconds(time);
 
             OnCancelClicked();

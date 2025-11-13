@@ -11,41 +11,45 @@ namespace GodsCarrom.Abilites
         public Ability abilityClass;
     }
 
+    public struct AbilityNameAndClass
+    {
+        public AbilitiesEnum abilityName;
+        public Ability abilityClass;
+
+        public AbilityNameAndClass(AbilitiesEnum name, Ability aClass)
+        {
+            abilityName = name; abilityClass = aClass;
+        }
+    }
+
     public class AbilityService
     {
         private AbilityDetails selectedAbility;
         private Ability abilityClass;
 
-        //private List<AbilityPackage> toBeCasted;
-        //private List<AbilityPackage> toBeReverted;
         private List<AbilityPackage> toBeCasted;
         private List<AbilityPackage> toBeReverted;
 
-        private List<int> randoms;
+        //private List<int> randoms;
 
         public AbilityService()
         {
             toBeCasted = new List<AbilityPackage>();
             toBeReverted = new List<AbilityPackage>();
 
-            randoms = new List<int>();
+            //randoms = new List<int>();
         }
 
         public void SetAbility(AbilityDetails selectedAbility)
         {
-            //this.selectedAbility = selectedAbility;
-            //abilityClass = UtilityClass.GetAbilityClass(selectedAbility);
-
-            //CheckAndCastAbility();
-
             AbilityPackage package = new AbilityPackage();
             package.selectedAbility = selectedAbility;
             package.abilityClass = UtilityClass.GetAbilityClass(selectedAbility);
 
-            //abilities.Add(package);
             toBeCasted.Add(package);
 
-            GameService.Instance.gameManager.phaseOver = true;//ability is processed and stored in to be casted
+            //GameService.Instance.gameManager.phaseOver = true;//ability is processed and stored in to be casted
+            GameService.Instance.GameplayService.phaseOver = true;//ability is processed and stored in to be casted
         }
 
         public void PerformAbilityUpdates(AbilityCastTime castTime)
@@ -53,14 +57,16 @@ namespace GodsCarrom.Abilites
             CheckAndRevertAbilityNew(castTime);
             CheckAndCastAbilityNew(castTime);
 
-            GameService.Instance.gameManager.phaseOver = true;
+            //wait for ability cast time and animations then do phaseOver = true;
+
+            //GameService.Instance.gameManager.phaseOver = true;
+            GameService.Instance.GameplayService.phaseOver = true;
         }
 
         public void CheckAndCastAbilityNew(AbilityCastTime castTime)
         {
             if(toBeCasted.Count > 0)
             {
-
                 List<AbilityPackage> toBeRemoved = new List<AbilityPackage>();
 
                 foreach(AbilityPackage a in toBeCasted)

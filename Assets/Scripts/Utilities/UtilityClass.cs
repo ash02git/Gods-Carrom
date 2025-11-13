@@ -2,13 +2,53 @@
 using GodsCarrom.CarromMan;
 using GodsCarrom.Formations;
 using GodsCarrom.Gods;
-using System;
+using GodsCarrom.Player;
 using UnityEngine;
 
 namespace GodsCarrom.Utilities
 {
     public static class UtilityClass
     {
+        public static PlayerNumber GetOpponent(PlayerNumber playerNumber)
+        {
+            if (playerNumber == PlayerNumber.Player1)
+                return PlayerNumber.Player2;
+            else if (playerNumber == PlayerNumber.Player2)
+                return PlayerNumber.Player1;
+            else
+                return PlayerNumber.None;
+        }
+
+        public static CarromManController CreateSpecificCarromMan(PlayerController playerController, CarromManScriptableObject carromSO, CarromManView prefab, GodName godName)
+        {
+            switch(godName)
+            {
+                case GodName.Jesus:
+                    return new JesusPieceController(playerController, carromSO, prefab);
+
+                case GodName.Thor:
+                    return new ThorPieceController(playerController, carromSO, prefab);
+
+                default:
+                    return new CarromManController(playerController, carromSO, prefab);
+            }
+        }
+
+        public static CarromManController CreateSpecificCarromMan(PlayerController playerController, CarromManModel carromManModel, CarromManView prefab, GodName godName)
+        {
+            switch (godName)
+            {
+                case GodName.Jesus:
+                    return new JesusPieceController(playerController, carromManModel, prefab);
+
+                case GodName.Thor:
+                    return new ThorPieceController(playerController, carromManModel, prefab);
+
+                default:
+                    return new CarromManController(playerController, carromManModel, prefab);
+            }
+        }
+
         public static FormationScriptableObject GetFormationSO(FormationEnum formation)
         {
             switch(formation)

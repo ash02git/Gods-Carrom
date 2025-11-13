@@ -1,4 +1,5 @@
-﻿using GodsCarrom.Player;
+﻿using GodsCarrom.Main;
+using GodsCarrom.Player;
 using UnityEngine;
 
 namespace GodsCarrom.Abilites
@@ -10,19 +11,21 @@ namespace GodsCarrom.Abilites
         public WaterToWineAbility(PlayerNumber playerNumber, AbilitiesEnum abilityName)
         {
             this.playerNumber = playerNumber;
-            castTime = AbilityCastTime.InMove;
-            revertTime = AbilityCastTime.None;
+            castTime = AbilityCastTime.InMove;//actually InMove, changed to PhysicsMove
+            revertTime = AbilityCastTime.PostMove;
             this.abilityName = abilityName;
         }
 
         public override void OnAbilityCast()
         {
             Debug.Log(abilityName.ToString() + " is cast");
+            GameService.Instance.PlayerService.ActivateAbility(playerNumber, AbilitiesEnum.WaterToWine);
         }
 
         public override void OnAbilityReverted()
         {
             Debug.Log(abilityName.ToString() + " is reverted");
+            GameService.Instance.PlayerService.DeactivateAbility(playerNumber, AbilitiesEnum.WaterToWine);
         }
     }
 }

@@ -71,6 +71,9 @@ namespace GodsCarrom.UI
             playerUIView.OnAbilitySelected();
             ability.SetPlayerNumber(playerNumber);
             GameService.Instance.AbilityService.SetAbility(ability);
+
+            //AbilityNameAndClass abilityNameAndClass =  GameService.Instance.PlayerService.GetAbilityClassAndName( playerNumber, ability.abilityName);
+            //GameService.Instance.AbilityService.SetAbility(abilityNameAndClass);
         }
 
         public void TurnOnAbilityBlocker()
